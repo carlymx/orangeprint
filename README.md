@@ -2,6 +2,6 @@
 
 ### ORANGEPRINT - Como configurar una Orange Pi para controlar impresoras Reprap.
 
-![logo](https://raw.githubusercontent.com/carlymx/orangeprint/master/imgs/LogoOctoprint_low.png")
+![Logo](https://github.com/carlymx/orangeprint/blob/master/imgs/LogoOctoprint_low.png)
 
 (...)
