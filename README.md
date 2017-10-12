@@ -11,8 +11,39 @@ La idea Inicial fue la de organizar mis apuntes pero mis amigos al pedirme ayuda
 
 He destinado mucho tiempo a crear este manual y lo que le queda, solo intento compactar los conocimientos adquiridos para que sea mas fácil a otros y a mi mismo tener la base de lo necesario para poder trabajar.
 
+De momento el contenido del manual es el que sigue.
+
 ##INDICE:
-- 1. Preparativos: o 1.1 Hardware. o 1.2 Software. - 2 Instalación del Sistema Operativo ARMbian. - 3 Acceso a la OPI sin monitor o pantallas por SSH: o 3.1 Configuración del Router. o 3.2 Acceso por SSH - 4 Configuración del Sistema Básico: o 4.1 Actualizar el sistema. o 4.2 Zona horaria, Leguaje y Teclado. o 4.3 Conectar la WIFI. - 5 Instalar dependencias y programas básicos: o 5.1 Instalar Python. o 5.2 Crear usuario para Octoprint. o 5.3 Instalar herramienta PySerial. - 6 Instalación de Octoprint: o Instalación del servidor de impresión Octoprint. o Configuración básica por asistente. o Convertir a Octoprint en un Servicio (Daemon). - 7 Herramientas y Saberes Útiles a tener en cuenta: o 7.1 Como Saber la calidad de la señal WIFI. o 7.2 Copia de Seguridad de la SD por USB. o 7.3 Acceso ssh directo sin identificarse. o 7.4 Acceso al Directorio ‘Upload’ por Red Local.
+1. Preparativos:
+  * 1.1 Hardware.
+  * 1.2 Software.
+
+2. Instalación del Sistema Operativo ARMbian.
+
+3. Acceso a la OPI sin monitor o pantallas por SSH:
+  * 3.1 Configuración del Router.
+  * 3.2 Acceso por SSH
+  
+4. Configuración del Sistema Básico:
+  * 4.1 Actualizar el sistema.
+  * 4.2 Zona horaria, Leguaje y Teclado.
+  * 4.3 Conectar la WIFI.
+  
+5. Instalar dependencias y programas básicos:
+  * 5.1 Instalar Python.
+  * 5.2 Crear usuario para Octoprint.
+  * 5.3 Instalar herramienta PySerial.
+  
+6. Instalación de Octoprint:
+  * Instalación del servidor de impresión Octoprint.
+  * Configuración básica por asistente.
+  * Convertir a Octoprint en un Servicio (Daemon).
+  
+7. Herramientas y Saberes Útiles a tener en cuenta:
+  * 7.1 Como Saber la calidad de la señal WIFI.
+  * 7.2 Copia de Seguridad de la SD por USB.
+  * 7.3 Acceso ssh directo sin identificarse.
+  * 7.4 Acceso al Directorio ‘Upload’ por Red Local.
 
 
 Así pues, espero que estas linear les puedan servir de ayuda y consigan como yo poder poner en marcha y usar con gozo esta maravillosa mezcla de tecnologías y saber humano.
