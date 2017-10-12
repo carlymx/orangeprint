@@ -13,7 +13,7 @@ He destinado mucho tiempo a crear este manual y lo que le queda, solo intento co
 
 De momento el contenido del manual es el que sigue.
 
-##INDICE:
+## INDICE:
 1. Preparativos:
   * 1.1 Hardware.
   * 1.2 Software.
