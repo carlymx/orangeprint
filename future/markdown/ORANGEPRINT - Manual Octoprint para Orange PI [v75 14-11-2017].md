@@ -729,7 +729,7 @@ cd /home/octoprint
 o así:  
 cd \~
 
-“ el carácter ‘ \~ ‘ que es la virgulilla de la letra ‘Ñ’ pero separado como
+“ El carácter ‘ \~ ‘ que es la virgulilla de la letra ‘Ñ’ pero separado como
 carácter independiente se consigue escribir en los teclados que carecen de ella
 mediante la combinación ‘ Alt+126’ y en los terminales Linux con la tecla 'F5' “
 
