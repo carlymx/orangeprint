@@ -111,7 +111,7 @@ INDICE
 
 -   *99 Comandos Útiles.*
 
-1 PREPARATIVOS: 
+1 PREPARATIVOS:
 ================
 
 1.1 HARDWARE
@@ -197,7 +197,7 @@ manual.
 
 ![](media/6caa1aec1450d2fcfe3a66ce904cdf45.png)
 
-  
+
 Contenido del paquete comprimido.
 
 Una vez descomprimido podemos ver en el directorio que hay un archivo \*.IMG
@@ -329,7 +329,7 @@ motivo y así poder acceder siempre a ella por esa IP.
 
 ![](media/d53e506ebb921b4ef9ce797d183e3fa9.png)
 
-  
+
 En mi caso he asignado la IP fija ‘192.168.0.101’
 
 Aplicamos, guardamos y si es necesario reiniciamos el router, una vez hecho eso
@@ -611,7 +611,7 @@ las mías, una línea por cada pantalla que aparece:
 
 ![](media/6bc82493581b5fe6ee1bbd0d0769f653.png)
 
-  
+
 Y como pueden ver ya aparecen las tildes, el símbolo del Euro…. Vaya me falto
 probar la ‘Ñ’ xDDD
 
@@ -713,7 +713,7 @@ sudo apt-get upgrade
 sudo adduser octoprint
 
 Nos pedirá que pongamos una contraseña y demás cosas como al principio.  
-  
+
 sudo usermod -a -G tty octoprint  
 sudo usermod -a -G dialout octoprint  
 sudo adduser octoprint sudo
@@ -731,7 +731,7 @@ cd \~
 
 “ el carácter ‘ \~ ‘ que es la virgulilla de la letra ‘Ñ’ pero separado como
 carácter independiente se consigue escribir en los teclados que carecen de ella
-mediante la combinación ‘ Alt+126’ “
+mediante la combinación ‘ Alt+126’ y en los terminales Linux con la tecla 'F5' “
 
 -   Instalar [Pyserial](https://pythonhosted.org/pyserial/): Es una aplicación
     escrita en Python para la administración de las comunicaciones de los
@@ -846,12 +846,12 @@ aparecerá un asistente de configuración básica donde pondremos lo siguiente:
 
 ![C:\\Users\\CaRLy\\AppData\\Local\\Microsoft\\Windows\\INetCache\\Content.Word\\sshot-48.png](media/2321c374439ccf4d989d481b3123bb6e.png)
 
-  
+
 Siguiente \>
 
 ![](media/089804260dd6a6cddd0f65d61814b532.png)
 
-  
+
 Creamos el usuario administrador del servidor.  
 Su contraseña (recordarla…).  
 pulsamos: Keep Access Control Enabled.  
@@ -859,7 +859,7 @@ Siguiente \>
 
 ![](media/ac0c0e42f7a0247594f8610656b3679e.png)
 
-  
+
 La configuración del CuraEngine de momento pasamos dado que no lo hemos
 instalado (yo no lo utilizo, subo directamente los GCodes ya hechos desde mi PC,
 aun que todo se andará)  
@@ -867,7 +867,7 @@ Siguiente \>
 
 ![](media/b99540b7941b7ede64f52037e5cbe387.png)
 
-  
+
 En esta ficha debéis configurar los aspectos básicos de vuestra impresora,
 Nombre, Dimensiones de la superficie de impresión, velocidades máximas de la
 misma, numero de Extrusores etc..
@@ -889,7 +889,7 @@ nuestro caso en:
 
 ![C:\\Users\\CaRLy\\AppData\\Local\\Microsoft\\Windows\\INetCache\\Content.Word\\sshot-54.png](media/9d2a584a1bfa34415cfd3448816f7216.png)
 
-  
+
 La WebCam de momento la dejaremos sin configurar y le daremos a siguiente y
 habremos finalizado el asistente.
 
