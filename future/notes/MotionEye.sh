@@ -63,6 +63,16 @@ tornado	2.0.4
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 
+## Motion guarda por defecto videos e imagenes en /var/bin/motion/motion
+	# Para saber el tamaño que ocupa ese directorio:
+		du -shc /var/lib/motion/
+	
+	# Para borrarel contenido
+		sudo rm -r /var/lib/motion/
+
+## Para configurar y controlar el Motion acceder por web
+	http://192.168.0.105:8080
+		
 Modo 2 Solo Motion(Sakatas)
 
 // Tutorial
@@ -100,6 +110,18 @@ sudo nano /etc/motion/motion.conf
 		stream_motion on ;--------------------- Cuando no detecta movimiento ir a 1 fps
 		stream_maxrate 12 ;-------------------- Cuando detecta movimeinto ir max 12 fps
 		stream_localhost off ;----------------- No restringir el streaming a equipo local
+
+	// HTTP Based Control
+		webcontrol_port 8080 ; ---------------- Puerto de acceso
+		webcontrol_localhost off ; ------------ Para poder acceder desde cualquier 
+		webcontrol_html_output on ; ----------- Para poder controlar y configurar el Motion por Web
+
+	// Image File Ouput
+		output_pictures = off ; --------------- No Guardes imagenes
+		
+	// FFMPEG related options
+		ffmpeg_output_movies = off ; ---------- No Guardes Videos
+		
 		
 
 // Configurar inicio del servicio
@@ -111,7 +133,6 @@ sudo nano /etc/default/motion
 
 // Iniciar servicio		
 sudo service motion start
-
 
 
 ///////////////////////////////////
