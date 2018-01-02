@@ -1,11 +1,4 @@
-	+ 1000 PLUGINS
-	---------------
-	-	TouchUI
-		http://plugins.octoprint.org/plugins/touchui/
-	-	CustomBackground
-		http://plugins.octoprint.org/plugins/custombackground/
-	-	
-	
+
 	
 
 //------------------------------------------------------//
@@ -97,13 +90,7 @@ sudo smbpasswd -a octoprint
 
  
 
-
-
-
-
-
-
-/* otros
+/* otros (probar)
 mount -t cifs \\MYPC\samba -o username=USERNAME, password=PASSWORD /home/octoprint/samba_MYPC
 \\MYPC\samba
 
@@ -113,11 +100,6 @@ sudo mount -t cifs //192.168.0.100/samba -o username=USERNAME,password=MYPASSWOR
 
 ---
 
-//----------------------------------//
-//		CONTROL RELE POR GPIO		//
-//----------------------------------//
-
-PROXIMO...
 
 
 

@@ -1,5 +1,20 @@
 
 		*** COSAS QUE FALTAN ****
+
+	+ 1000 PLUGINS
+	---------------
+	-	TouchUI
+		http://plugins.octoprint.org/plugins/touchui/
+	-	CustomBackground
+		http://plugins.octoprint.org/plugins/custombackground/
+	-	Emergency STOP! button
+		https://github.com/ntoff/OctoPrint-Estop
+	-	Navbar Temp
+		https://github.com/imrahil/OctoPrint-NavbarTemp
+	-	
+	
+
+
 		
 	+ CONTROL POR LA SALIDA DE SERVOS DEL VENTILADOR DE CAPA, LUCES...
 	+ CON TRANSISTOR 2N2222
@@ -29,6 +44,12 @@
 
 	+ Liberar Espacio
 		https://www.ramonramon.org/blog/2015/11/03/liberar-espacio-en-la-particion-de-sistema-ubuntu/
+
+		
+
+//----------------------------------//
+//		CONTROL RELE POR GPIO		//
+//----------------------------------//
 
 	+ GPIO
 		http://www.orangepi.org/orangepibbsen/forum.php?mod=viewthread&tid=1308&highlight=gpio

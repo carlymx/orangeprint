@@ -1,66 +1,5 @@
-video Motioneye
-https://www.youtube.com/watch?v=XQ-Inn3sDmc
-
-
-
-https://github.com/ccrisan/motioneye/wiki/Install-On-Ubuntu
-
-add-apt-repository -y ppa:kirillshkrogalev/ffmpeg-next
-apt-get update
-
-* Si da error no problema continuar.
-
-apt-get install motion ffmpeg v4l-utils
-apt-get install python-pip python-dev curl libssl-dev libcurl4-openssl-dev libjpeg-dev
-
- pip install motioneye
- 
- 
- mkdir -p /etc/motioneye
- cp /usr/local/share/motioneye/extra/motioneye.conf.sample /etc/motioneye/motioneye.conf
- mkdir -p /var/lib/motioneye
-
-
- 
-cp /usr/local/share/motioneye/extra/motioneye.systemd-unit-local /etc/systemd/system/motioneye.service
-systemctl daemon-reload
-systemctl enable motioneye
-systemctl start motioneye
-
-
-pip install motioneye --upgrade
-systemctl restart motioneye
-
-
-URL IP de la OPI :8765	(ejmplo. 192.168.0.105:8765)
-Pinchar el Logotipo.
-login:		admin
-pass :					(dejar en blanco)
-
-
-
-// Al conectar la WebCam al USB, se puede usar el comando 
-
-lsusb
-
----------
-Dependencias
-
-pyserial 2.7
-	https://pypi.python.org/pypi/pyserial/2.7
-
-	wget https://pypi.python.org/packages/df/c9/d9da7fafaf2a2b323d20eee050503ab08237c16b0119c7bbf1597d53f793/pyserial-2.7.tar.gz#md5=794506184df83ef2290de0d18803dd11
-
-Jinja2 >=2.8.x y <2.9.x
-	https://pypi.python.org/pypi/Jinja2/2.8
-	wget https://pypi.python.org/packages/f2/2f/0b98b06a345a761bec91a079ccae392d282690c2d8272e708f4d10829e22/Jinja2-2.8.tar.gz#md5=edb51693fe22c53cee5403775c71a99e
-
-tornado	2.0.4
-	https://pypi.python.org/pypi/tornado/4.0.2
-
-	wget https://pypi.python.org/packages/66/bb/782999291b390181aa2c38ac3ad167567d933e92c0d7ce3f421b3abe4586/tornado-4.0.2.tar.gz
-
 /////////////////////////////////////////////////////////
+MOTION:
 /////////////////////////////////////////////////////////
 
 ## Motion guarda por defecto videos e imagenes en /var/bin/motion/motion
@@ -156,8 +95,75 @@ sudo service motion start
 		uvcdynctrl -l
 
 
+-------------------------------------------------------------------------------------------
+FIN
+-------------------------------------------------------------------------------------------		
 		
 		
+--------------------------
+--		OLD NO USAR		--
+--------------------------
+video Motioneye
+https://www.youtube.com/watch?v=XQ-Inn3sDmc
+
+
+
+https://github.com/ccrisan/motioneye/wiki/Install-On-Ubuntu
+
+add-apt-repository -y ppa:kirillshkrogalev/ffmpeg-next
+apt-get update
+
+* Si da error no problema continuar.
+
+apt-get install motion ffmpeg v4l-utils
+apt-get install python-pip python-dev curl libssl-dev libcurl4-openssl-dev libjpeg-dev
+
+ pip install motioneye
+ 
+ 
+ mkdir -p /etc/motioneye
+ cp /usr/local/share/motioneye/extra/motioneye.conf.sample /etc/motioneye/motioneye.conf
+ mkdir -p /var/lib/motioneye
+
+
+ 
+cp /usr/local/share/motioneye/extra/motioneye.systemd-unit-local /etc/systemd/system/motioneye.service
+systemctl daemon-reload
+systemctl enable motioneye
+systemctl start motioneye
+
+
+pip install motioneye --upgrade
+systemctl restart motioneye
+
+
+URL IP de la OPI :8765	(ejmplo. 192.168.0.105:8765)
+Pinchar el Logotipo.
+login:		admin
+pass :					(dejar en blanco)
+
+
+
+// Al conectar la WebCam al USB, se puede usar el comando 
+
+lsusb
+
+---------
+Dependencias
+
+pyserial 2.7
+	https://pypi.python.org/pypi/pyserial/2.7
+
+	wget https://pypi.python.org/packages/df/c9/d9da7fafaf2a2b323d20eee050503ab08237c16b0119c7bbf1597d53f793/pyserial-2.7.tar.gz#md5=794506184df83ef2290de0d18803dd11
+
+Jinja2 >=2.8.x y <2.9.x
+	https://pypi.python.org/pypi/Jinja2/2.8
+	wget https://pypi.python.org/packages/f2/2f/0b98b06a345a761bec91a079ccae392d282690c2d8272e708f4d10829e22/Jinja2-2.8.tar.gz#md5=edb51693fe22c53cee5403775c71a99e
+
+tornado	2.0.4
+	https://pypi.python.org/pypi/tornado/4.0.2
+
+	wget https://pypi.python.org/packages/66/bb/782999291b390181aa2c38ac3ad167567d933e92c0d7ce3f421b3abe4586/tornado-4.0.2.tar.gz
 		
 		
 		
