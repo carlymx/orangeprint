@@ -1143,8 +1143,6 @@ lotes tipo **\*.BAT**.
 
 ![](media/c77dd9e07a24cf1a6c76203d85e90e4c.png)
 
->   C:\\Users\\CaRLy\\AppData\\Local\\Microsoft\\Windows\\INetCache\\Content.Word\\sshot-68.png
-
 >   Dentro escribiremos uno de los siguientes comandos ya conocidos, pero con la
 >   ruta donde tenemos el ejecutable del PUTTY.
 

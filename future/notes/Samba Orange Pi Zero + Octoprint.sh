@@ -81,9 +81,9 @@ sudo smbpasswd -a octoprint
 	chmod 777 /home/octoprint/.octoprint/uploads/shared
 
 	// COMANDO mount.cifs
-	mount.cifs //192.168.0.100/samba -o username=CaRLy,password=@1Merdolfo1@ /home/octoprint/samba_pccarly
+	mount.cifs //192.168.0.100/samba -o username=CaRLy,password=MYPASSWORD /home/octoprint/samba_pccarly
 
-	mount.cifs //192.168.0.100/Proyectos /home/octoprint/.octoprint/uploads/shared -o username=carlymx@hotmail.com,password=@1Merdolfo1@ /home/octoprint/.octoprint/uploads/shared
+	mount.cifs //192.168.0.100/Proyectos /home/octoprint/.octoprint/uploads/shared -o username=carlymx@hotmail.com,password=MYPASSWORD /home/octoprint/.octoprint/uploads/shared
 
 
 //--------- MONTAR UNIDAD DE RED PERMANENTEMENTE
@@ -107,7 +107,7 @@ sudo smbpasswd -a octoprint
 mount -t cifs \\CARLYPC\samba -o username=CaRLy, password=contraseña /home/octoprint/samba_pccarly
 \\CARLYPC\samba
 
-sudo mount -t cifs //192.168.0.100/samba -o username=CaRLy,password=@1Merdolfo1@ /home/octoprint/samba_pccarly
+sudo mount -t cifs //192.168.0.100/samba -o username=CaRLy,password=MYPASSWORD /home/octoprint/samba_pccarly
 
 */
 
