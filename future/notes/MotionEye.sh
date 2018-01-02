@@ -73,7 +73,7 @@ tornado	2.0.4
 ## Para configurar y controlar el Motion acceder por web
 	http://192.168.0.105:8080
 		
-Modo 2 Solo Motion(Sakatas)
+Modo 2 Solo Motion(ESTE)
 
 // Tutorial
 	http://www.orangepi.org/Docs/Webcams.html

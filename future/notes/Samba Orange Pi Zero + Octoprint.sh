@@ -34,7 +34,7 @@ sudo nano /etc/samba/smb.conf
 	create mask= 0777
 	directory mask= 0777
 	public= no
-	write list = root, bananika, octoprint
+	write list = root, octoprint
 
 	[opiz_upload]
 	comment= Carpeta Upload
@@ -47,7 +47,7 @@ sudo nano /etc/samba/smb.conf
 	create mask= 0777
 	directory mask= 0777
 	public= no
-	write list = root, bananika, octoprint
+	write list = root, octoprint
 
 	[timelapse]
 	comment= camara timelapses
@@ -60,7 +60,7 @@ sudo nano /etc/samba/smb.conf
 	create mask= 0777
 	directory mask= 0777
 	public= no
-	write list = root,bananika, octoprint
+	write list = root, octoprint
 
  
 sudo smbpasswd -a octoprint
@@ -81,9 +81,9 @@ sudo smbpasswd -a octoprint
 	chmod 777 /home/octoprint/.octoprint/uploads/shared
 
 	// COMANDO mount.cifs
-	mount.cifs //192.168.0.100/samba -o username=CaRLy,password=MYPASSWORD /home/octoprint/samba_pccarly
+	mount.cifs //192.168.0.100/samba -o username=USERNAME,password=MYPASSWORD /home/octoprint/DIRECTORIO-COMPARTIDO
 
-	mount.cifs //192.168.0.100/Proyectos /home/octoprint/.octoprint/uploads/shared -o username=carlymx@hotmail.com,password=MYPASSWORD /home/octoprint/.octoprint/uploads/shared
+	mount.cifs //192.168.0.100/Proyectos /home/octoprint/.octoprint/uploads/shared -o username=USERNAME@DOMINIO.com,password=MYPASSWORD /home/octoprint/.octoprint/uploads/shared
 
 
 //--------- MONTAR UNIDAD DE RED PERMANENTEMENTE
@@ -93,7 +93,7 @@ sudo smbpasswd -a octoprint
 	sudo apt-get install cifs-common o cifs-utils
 
 	sudo nano  /etc/fstab
-		//192.168.0.186/compartidolinux /media/compartidolinux cifs user=ubuntu,password=reverse,noexec,user,rw,nounix,iocharset=utf8 0 0
+		//192.168.0.186/compartidolinux /media/compartidolinux cifs user=USERNAME,password=PASSWORD,noexec,user,rw,nounix,iocharset=utf8 0 0
 
  
 
@@ -104,10 +104,10 @@ sudo smbpasswd -a octoprint
 
 
 /* otros
-mount -t cifs \\CARLYPC\samba -o username=CaRLy, password=contraseña /home/octoprint/samba_pccarly
-\\CARLYPC\samba
+mount -t cifs \\MYPC\samba -o username=USERNAME, password=PASSWORD /home/octoprint/samba_MYPC
+\\MYPC\samba
 
-sudo mount -t cifs //192.168.0.100/samba -o username=CaRLy,password=MYPASSWORD /home/octoprint/samba_pccarly
+sudo mount -t cifs //192.168.0.100/samba -o username=USERNAME,password=MYPASSWORD /home/octoprint/samba_MYPC
 
 */
 
@@ -117,7 +117,7 @@ sudo mount -t cifs //192.168.0.100/samba -o username=CaRLy,password=MYPASSWORD /
 //		CONTROL RELE POR GPIO		//
 //----------------------------------//
 
-
+PROXIMO...
 
 
 
