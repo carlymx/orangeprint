@@ -106,6 +106,12 @@ sudo nano /etc/motion/motion.conf
 		height 360 ; -------------------------- Resolucion (Alto) 4:3 o 16:9 de Ancho...
 		framerate 12 ; ------------------------ Fps de la captura del video
 
+	// Image File Ouput
+		output_pictures = off ; --------------- No Guardes imagenes
+		
+	// FFMPEG related options
+		ffmpeg_output_movies = off ; ---------- No Guardes Videos
+
 	// Live Stream Server
 		stream_motion on ;--------------------- Cuando no detecta movimiento ir a 1 fps
 		stream_maxrate 12 ;-------------------- Cuando detecta movimeinto ir max 12 fps
@@ -116,11 +122,6 @@ sudo nano /etc/motion/motion.conf
 		webcontrol_localhost off ; ------------ Para poder acceder desde cualquier 
 		webcontrol_html_output on ; ----------- Para poder controlar y configurar el Motion por Web
 
-	// Image File Ouput
-		output_pictures = off ; --------------- No Guardes imagenes
-		
-	// FFMPEG related options
-		ffmpeg_output_movies = off ; ---------- No Guardes Videos
 		
 		
 
@@ -151,7 +152,7 @@ sudo service motion start
 	
 	sudo apt-get install uvcdynctrl
 
-		uvcdynctrl -f
+		uvcdynctrl -f					// Lista Resoluciones soportadas por la WebCam de manera nativa (por Hardware)
 		uvcdynctrl -l
 
 
