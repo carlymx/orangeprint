@@ -65,6 +65,13 @@
 		https://github.com/xpertsavenue/WiringOP-Zero
 			Instalacion
 			OPI H2 (Zero): git clone https://github.com/xpertsavenue/WiringOP-Zero.git
+				cd WiringOP-Zero
+				chmod +x ./build
+				sudo ./build
+				
+				// Test:
+				gpio readall			// Muestra tabla ASCII GPIO
+				gpio write 30 1			// Activar Led Rojo de la Placa
 		
 
 // xx: INSTALAR CURA-ENGINE
