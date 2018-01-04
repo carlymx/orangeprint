@@ -5,13 +5,30 @@
 	---------------
 	-	TouchUI
 		http://plugins.octoprint.org/plugins/touchui/
+	
 	-	CustomBackground
 		http://plugins.octoprint.org/plugins/custombackground/
+	
 	-	Emergency STOP! button
 		https://github.com/ntoff/OctoPrint-Estop
+	
 	-	Navbar Temp
 		https://github.com/imrahil/OctoPrint-NavbarTemp
-	-	
+	
+	-	PSU CONTROL
+		https://plugins.octoprint.org/plugins/psucontrol/
+	
+	-	System Command Editor
+		https://github.com/Salandora/OctoPrint-SystemCommandEditor
+	
+	-	GCODE System Commands
+		https://github.com/kantlivelong/OctoPrint-GCodeSystemCommands
+	
+	-	GcodeEditor
+		https://github.com/ieatacid/OctoPrint-GcodeEditor
+		
+	-	Preheat Button
+		https://github.com/marian42/octoprint-preheat
 	
 
 
@@ -55,23 +72,48 @@
 		http://www.orangepi.org/orangepibbsen/forum.php?mod=viewthread&tid=1308&highlight=gpio
 		https://diyprojects.io/orange-pi-armbian-install-wiringop-library-wiringpi-equivalent/#.WZf5iuntbRZ
 	
-		WIRINGOP (MPU H3 y H5)
-		https://github.com/kazukioishi/WiringOP
-			Instalacion
-			OPI H3:		git clone https://github.com/kazukioishi/WiringOP.git -b h3
-			OPI H5:		git clone https://github.com/kazukioishi/WiringOP.git -b h5
+		-	WIRINGOP (MPU H3 y H5)
+			https://github.com/kazukioishi/WiringOP
+				Instalacion
+				OPI H3:		git clone https://github.com/kazukioishi/WiringOP.git -b h3
+				OPI H5:		git clone https://github.com/kazukioishi/WiringOP.git -b h5
 
-		WIRINGOP-Zero (MPU H2)
-		https://github.com/xpertsavenue/WiringOP-Zero
-			Instalacion
-			OPI H2 (Zero): git clone https://github.com/xpertsavenue/WiringOP-Zero.git
-				cd WiringOP-Zero
-				chmod +x ./build
-				sudo ./build
-				
-				// Test:
-				gpio readall			// Muestra tabla ASCII GPIO
-				gpio write 30 1			// Activar Led Rojo de la Placa
+		-	WIRINGOP-Zero (MPU H2)
+			https://github.com/xpertsavenue/WiringOP-Zero
+				Instalacion
+				OPI H2 (Zero): git clone https://github.com/xpertsavenue/WiringOP-Zero.git
+					cd WiringOP-Zero
+					chmod +x ./build
+					sudo ./build
+					
+					// Test:
+					gpio readall			// Muestra tabla ASCII GPIO
+					gpio write 30 1			// Activar Led Rojo de la Placa
+					
+		** EL PIN USADO PARA CONECTAR EL RELE SERA EL PIN 7 DADO QUE NACE EN ESTADO BAJO (0.03V).
+		** CON EL COMANDO 'gpio readall' EN LA COLUMNA 'wPi' NOS INDICARA EL NUMERO DEL GPIO A USAR, POR EJEMPLO EL (GPIO 7)
+		** EDITAR ARCHIVO '/etc/rc.local' Y AGREGAR SIGUIENTE TEXTO ANTES DE LA LINEA 'exit 0' Y EDITARLO SEGÚN CONVENGA:
+		
+			#====================#
+			#    GPIO CONFIG     #
+			#====================#
+
+			# INSTRUCCIONES:
+			# 1. INSTALA DEL REPOSITORIO CORRESPONDIENTE A TU MPU (H2,, H3 O H5)
+			#    H2+   = https://github.com/xpertsavenue/WiringOP-Zero
+			#    H3-H5 = https://github.com/kazukioishi/WiringOP
+			#
+			# 2. USA COMANDO 'gpio readall' PARA SABER QUE GPIO ESTA ASIGNADO A CADA PIN
+			#
+			# 3. INDICA EL NUMERO DEL GPIO QUE VAS A USAR TAL COMO INDICA EL EJEMPLO
+			#    COPIA LA ESTRUCTURA POR CADA UNO DE LOS PINES QUE QUIERES USAR.
+			#
+
+			sudo gpio mode 7 out
+
+			#--FIN--#
+
+
 		
 
 // xx: INSTALAR CURA-ENGINE
