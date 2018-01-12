@@ -8,7 +8,7 @@
 
 #### Características v1.0
 
-* ARMBian v5.35 sever - Ubuntu xenial 3.4.113.
+* ARMBian v5.35 server - Ubuntu xenial 3.4.113.
 	* Ultima actualización (12-01-2018).
 	* Redimensiona (dilata) la partición al maximo disponible en nuestra SD con nuestro primer reinicio.
 
