@@ -23,6 +23,7 @@ De momento les dejo con las principales características incluidas en la primera
 
 * ARMBian v5.35 sever - Ubuntu xenial 3.4.113.
 	* Ultima actualización (12-01-2018).
+	* Redimensiona (dilata) la partición al maximo disponible en nuestra SD con nuestro primer reinicio.
 
 * Octoprint 1.3.6
 	* URL Acceso: xx.xx.xx.xx:5000
