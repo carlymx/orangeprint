@@ -11,6 +11,9 @@
 	
 	-	Emergency STOP! button
 		https://github.com/ntoff/OctoPrint-Estop
+		
+	-	Simple Emergency Stop
+		https://github.com/BrokenFire/OctoPrint-SimpleEmergencyStop	
 	
 	-	Navbar Temp
 		https://github.com/imrahil/OctoPrint-NavbarTemp
@@ -30,6 +33,11 @@
 	-	Preheat Button
 		https://github.com/marian42/octoprint-preheat
 	
+	
+	+ Temperatura CPU
+	cat /sys/devices/virtual/thermal/thermal_zone0/temp
+	cat /etc/armbianmonitor/datasources/soctemp
+	armbianmonitor -m
 
 
 		
