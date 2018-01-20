@@ -6,7 +6,7 @@ MOTION:
 	# Para saber el tamaño que ocupa ese directorio:
 		du -shc /var/lib/motion/
 	
-	# Para borrarel contenido
+	# Para borrar el contenido
 		sudo rm -r /var/lib/motion/
 
 ## Para configurar y controlar el Motion acceder por web
@@ -82,7 +82,7 @@ sudo service motion start
 		https://superuser.com/questions/639738/how-can-i-list-the-available-video-modes-for-a-usb-webcam-in-linux
 		
 	// Comando
-	sudo apt-get install libv4l-0
+	sudo apt-get install v4l-utils libv4l-0
 
 		v4l2-ctl
 		v4l2-ctl --all
