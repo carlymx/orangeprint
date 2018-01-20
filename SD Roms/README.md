@@ -1,6 +1,6 @@
 # ORANGEPRINT
 
-## ORANGEPRINT - Compilación para Orange Pi (Zero) cara controlar una impresora RepRap.
+## ORANGEPRINT - Compilación para Orange Pi (Zero) para controlar una impresora RepRap.
 
 
 ### DESCARGAR COMPILACIÓN DESDE LA SECCIÓN [**RELEASES**](https://github.com/carlymx/orangeprint/releases) DEL PROTECTO.
