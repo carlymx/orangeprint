@@ -52,7 +52,7 @@ For now I leave you with the main features included in the first version of this
 * PySerial.
 * Configured GPIO (WIRINGOP-Zero).
 	* RELAY configured on pin 7 (Power On).
-	* [Relay connection scheme] (https://raw.githubusercontent.com/carlymx/orangeprint/master/future/imgs/OrangePi%20%2B%20Rele%20-%20Esquema.jpg)
+	* [Relay connection scheme](https://raw.githubusercontent.com/carlymx/orangeprint/master/future/imgs/OrangePi%20%2B%20Rele%20-%20Esquema.jpg)
 
 * Access SSH: User 'root' Password 'orangeprint'
 
