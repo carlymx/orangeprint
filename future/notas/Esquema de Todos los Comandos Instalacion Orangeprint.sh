@@ -102,7 +102,7 @@
 	sudo python setup.py install
 	
 	
-'Instalacion Octoprint'
+'Instalacion Octoprint (servidor de impresión)'
 
 	'Descarga Octoprint'
 	git clone https://github.com/foosel/OctoPrint.git
@@ -159,7 +159,7 @@
 	#####	
 	
 
-'Instalacion de Motion'
+'Instalacion de Motion (servidor para WebCam)'
 
 	'Previo'
 	sudo apt-get update
@@ -235,7 +235,78 @@
 	#
 	####
 	
+'Servidor SAMBA (compartir directorios con la Red)'
+	
+	'Instalar Samba'
+	sudo apt-get install samba samba-common-bin
+		
+	'Crear directorios a compartir'	
+	mkdir /home/orangeprint/share
+		
+	'Configurar Samba'
+	sudo nano /etc/samba/smb.conf
+		
+		`Global`
+		wins support = yes
+		
+		'Share Definitions'
+		# Al final del archivo:
+		[opiz_share]
+		comment= Carpeta compartida
+		path= /home/orangeprint/share
+		browseable= Yes
+		writeable= Yes
+		read only = no
+		guest ok = Yes
+		only guest= no
+		create mask= 0777
+		directory mask= 0777
+		public= no
+		write list = root, orangeprint
 
+		[opiz_upload]
+		comment= Carpeta Upload STLs
+		path= /home/orangeprint/.octoprint/uploads
+		browseable= Yes
+		writeable= Yes
+		read only = no
+		guest ok = Yes
+		only guest= no
+		create mask= 0777
+		directory mask= 0777
+		public= no
+		write list = root, orangeprint
+
+		[timelapse]
+		comment= camara timelapses
+		path= /home/orangeprint/.octoprint/timelapse
+		browseable= Yes
+		writeable= Yes
+		read only = no
+		guest ok = Yes
+		only guest= no
+		create mask= 0777
+		directory mask= 0777
+		public= no
+		write list = root, orangeprint
+			
+	'Poner una contraseña al usuario'
+	sudo smbpasswd -a root
+	sudo smbpasswd -a orangeprint
+	
+	'Reiniciar servidor Samba'
+	sudo /etc/init.d/samba restart
+	
+
+'Acceder a directorio externo'	
+	
+	sudo apt-get install cifs-utils nfs-common
+	
+	mkdir /home/orangeprint/.octoprint/uploads/shared
+	chmod 777 /home/orangeprint/.octoprint/uploads/shared
+
+	
+'Continuara....'	
 	
 	
 '=========FIN=========='	
@@ -251,5 +322,7 @@
 	`WebCam Format`	https://github.com/raspberrypi/firmware/issues/347
 					https://superuser.com/questions/639738/how-can-i-list-the-available-video-modes-for-a-usb-webcam-in-linux
 					
-	
+	`Samba y cifs`	https://help.ubuntu.com/community/Samba/SambaClientGuide
+					https://help.ubuntu.com/community/MountWindowsSharesPermanently
+					
 	
