@@ -41,10 +41,11 @@
 
 
 		
-	+ CONTROL POR LA SALIDA DE SERVOS DEL VENTILADOR DE CAPA, LUCES...
-	+ CON TRANSISTOR 2N2222
-	https://hetpro-store.com/TUTORIALES/transistor-2n2222-interruptor/?PageSpeed=noscript	
-
+	+ CONTROL POR LA SALIDA DE SERVOS: VENTILADOR DE CAPA, LUCES... CON TRANSISTOR 2N2222
+	URL Uso 2N2222:	https://hetpro-store.com/TUTORIALES/transistor-2n2222-interruptor/?PageSpeed=noscript	
+	URL Code Marlin: https://github.com/MarlinFirmware/Marlin/wiki/M42	
+		M42 P4 S255	; Encender Ventilador de Capa
+	
 	
 	+ CONTROL DEL VENTILADOR DE LA CAJA POR TEMPERATURA
 		- 2 OPCIONES:	1º CONTROLADO POR UN ARDUINO TINY85 + SENSOR DE TEMPERATURA + 2N2222
