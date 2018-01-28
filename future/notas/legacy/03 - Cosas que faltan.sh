@@ -1,7 +1,7 @@
 
 		*** COSAS QUE FALTAN ****
 
-	+ 1000 PLUGINS
+OK	+ 1000 PLUGINS
 	---------------
 	-	TouchUI
 		http://plugins.octoprint.org/plugins/touchui/
@@ -34,7 +34,7 @@
 		https://github.com/marian42/octoprint-preheat
 	
 	
-	+ Temperatura CPU
+OK	+ Temperatura CPU
 	cat /sys/devices/virtual/thermal/thermal_zone0/temp
 	cat /etc/armbianmonitor/datasources/soctemp
 	armbianmonitor -m
@@ -68,14 +68,14 @@
 	---------------------------------------------------------------
 	
 
-	+ Liberar Espacio
+OK	+ Liberar Espacio
 		https://www.ramonramon.org/blog/2015/11/03/liberar-espacio-en-la-particion-de-sistema-ubuntu/
 
 		
 
-//----------------------------------//
-//		CONTROL RELE POR GPIO		//
-//----------------------------------//
+OK //----------------------------------//
+   //		CONTROL RELE POR GPIO		//
+   //----------------------------------//
 
 	+ GPIO
 		http://www.orangepi.org/orangepibbsen/forum.php?mod=viewthread&tid=1308&highlight=gpio

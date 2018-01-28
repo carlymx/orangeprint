@@ -404,35 +404,70 @@
 		
 'Plugins Octoprint'
 
-	'TouchUI'
-		http://plugins.octoprint.org/plugins/touchui/
+	'TouchUI'					http://plugins.octoprint.org/plugins/touchui/
 		
-	'Simple Emergency Stop'
-		https://github.com/BrokenFire/OctoPrint-SimpleEmergencyStop	
+	'Simple Emergency Stop'		https://github.com/BrokenFire/OctoPrint-SimpleEmergencyStop	
+		`Configurar`
+		Emergency GCODE:	OCTO80
 	
-	'Navbar Temp'
-		https://github.com/imrahil/OctoPrint-NavbarTemp
+	'Navbar Temp'				https://github.com/imrahil/OctoPrint-NavbarTemp
 	
-	'OctoPrint-FloatingNavbar'
-		https://plugins.octoprint.org/plugins/floatingnavbar/
+	'OctoPrint-FloatingNavbar'	https://plugins.octoprint.org/plugins/floatingnavbar/
 	
-	'PSU CONTROL'
-		https://plugins.octoprint.org/plugins/psucontrol/
-	
-	'System Command Editor'
-		https://github.com/Salandora/OctoPrint-SystemCommandEditor
-	
-	'GCODE System Commands'
-		https://github.com/kantlivelong/OctoPrint-GCodeSystemCommands
-	
-	'GcodeEditor'
-		https://github.com/ieatacid/OctoPrint-GcodeEditor
+	'PSU CONTROL'				https://plugins.octoprint.org/plugins/psucontrol/
+		`Configurar`
+			`Switching`
+			Switching Method:	System Command
+			On System Command:	gpio write 7 1
+			Off System Command:	gpio write 7 0
+			Enable switching with G-Code commands.	CHECK
+			On G-Code Command: 	OCTO81
+			Off G-code Command	OCTO80
+
+
+			`Power Off Options`
+			Automatically turn PSU OFF when idle 	CHECK
+			Idle TimeOut	10
+				
+	'System Command Editor'		https://github.com/Salandora/OctoPrint-SystemCommandEditor
+		`Configurar`
+		Name:		Impresora On
+		Action:		Activar Rele de la Fuente
+		Command:	gpio write 7 1
 		
-	'Preheat Button'
-		https://github.com/marian42/octoprint-preheat
+		Name:		Impresora OFF
+		Action:		Desactivar Rele de la Fuente
+		Command:	gpio write 7 0
+		
+		Name:		WebCam ON
+		Action:		Iniciar Servidor Motion
+		Command:	sudo service motion start
+
+		Name:		WebCam OFF
+		Action:		Detener Servidor Motion
+		Command:	sudo service motion stop|restart
+		
+		Name:		WebCam Restart
+		Action:		Reiniciar Servidor Motion
+		Command:	sudo service motion restart
+
+				
+	'GCODE System Commands'		https://github.com/kantlivelong/OctoPrint-GCodeSystemCommands
+		`Configurar`
+		OCTO80	gpio write 7 0
+		OCTO81	gpio write 7 1
 	
-	'Firmware Updater'
-		https://plugins.octoprint.org/plugins/firmwareupdater/
+	'GcodeEditor'				https://github.com/ieatacid/OctoPrint-GcodeEditor
+		
+	'Preheat Button'			https://github.com/marian42/octoprint-preheat
+		`Configurar`
+		Fallback temperature for tool preheating	200		# Para PLA
+		Fallback temperature for bed preheating		 50		# "		"
+		
+	'Firmware Updater'			https://plugins.octoprint.org/plugins/firmwareupdater/
+		`Configurar`
+			Path to avrdude:	/usr/bin/avrdude
+
 		
 	
 
