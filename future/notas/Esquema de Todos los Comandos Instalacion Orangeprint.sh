@@ -55,14 +55,19 @@
 	 > Personal > Hostname > "orangeprint"
 	
 	
-	####
+	#### Notas del Sistema:
 	#
 		# Solución a problemas conexión SSH por WIFI en Windows:
 		# Desactivar el uso de IPv6 en la OPI
 		sudo nano /boot/cmdline.txt
 			ipv6.disable = 1
 		sudo /etc/init.d/networking restart
-	#
+	
+		# Temperatura CPU
+		cat /sys/devices/virtual/thermal/thermal_zone0/temp
+		cat /etc/armbianmonitor/datasources/soctemp
+		armbianmonitor -m
+	#	
 	####
 
 
@@ -83,8 +88,13 @@
 	
 	'Cambiar privilegios'
 	sudo visudo
-	orangeprint ALL=NOPASSWD: /sbin/shutdown
-	#orangeprint ALL=(ALL) NOPASSWD:ALL  # Este permite todo.
+		**Activar `#includedir /etc/sudoers.d`
+
+	sudo nano /etc/sudoers.d/directivas
+		# Especificar privilegios de usuario
+		orangeprint ALL=(ALL:ALL) ALL
+		orangeprint ALL=NOPASSWD: /sbin/shutdown
+		orangeprint ALL=(ALL) NOPASSWD:ALL
 
 	
 'Dependencias'
@@ -153,7 +163,7 @@
 		https://pypi.python.org/simple/wrapt/
 		https://pypi.python.org/packages/a0/47/66897906448185fcb77fc3c2b1bc20ed0ecca81a0f2f88eda3fc5a34fc3d/wrapt-1.10.11.tar.gz#md5=e1346f31782d50401f81c2345b037076
 	
-	# Eliminar la COntraseña de un Usuario:
+	# Eliminar la Contraseña de un Usuario:
 		sudo passwd usuario -d
 	#
 	#####	
@@ -304,10 +314,151 @@
 	
 	mkdir /home/orangeprint/.octoprint/uploads/shared
 	chmod 777 /home/orangeprint/.octoprint/uploads/shared
+	
+	'Modo simple'
+	sudo nano /etc/fstab
+		//192.168.0.000/directorio_compartido /home/orangeprint/.octoprint/uploads/shared cifs user=USERNAME,password=PASSWORD,noexec,user,rw,nounix,iocharset=utf8 0 0
 
+
+'GPIO: control de Relés para encender y apagar la Impresora'
+
+	'WIRINGOP (MPU H3 y H5)'
+	# https://github.com/kazukioishi/WiringOP
 	
-'Continuara....'	
+		`Instalacion`
+		"OPI H3:"	git clone https://github.com/kazukioishi/WiringOP.git -b h3
+		"OPI H5:"	git clone https://github.com/kazukioishi/WiringOP.git -b h5
+				
+			cd WiringOP
+			chmod +x ./build
+			sudo ./build
+
+	'WIRINGOP-Zero (MPU H2)'
+	# https://github.com/xpertsavenue/WiringOP-Zero
+		`Instalacion`
+		"OPI H2 (Zero):"	git clone https://github.com/xpertsavenue/WiringOP-Zero.git
+			
+			cd WiringOP-Zero
+			chmod +x ./build
+			sudo ./build
+					
+	'Test'
+	# Muestra tabla ASCII GPIO
+	gpio readall
+	# Activar Led Rojo de la Placa
+	gpio write 30 1
+
+		 ###============Ejemplo de la respuesta del comando gpio readall==============###
+		 +																				+
+		 +-----+-----+----------+------+--Orange Pi Zero--+---+------+---------+-----+--+
+		 | H2+ | wPi |   Name   | Mode | V | Physical | V | Mode | Name     | wPi | H2+ |
+		 +-----+-----+----------+------+---+----++----+---+------+----------+-----+-----+
+		 |     |     |     3.3v |      |   |  1 || 2  |   |      | 5v       |     |     |
+		 |  12 |   8 |    SDA.0 | ALT5 | 0 |  3 || 4  |   |      | 5V       |     |     |
+		 |  11 |   9 |    SCL.0 | ALT5 | 0 |  5 || 6  |   |      | 0v       |     |     |
+		 |   6 |   7 |   GPIO.7 | ALT3 | 0 |  7 || 8  | 0 | ALT5 | TxD3     | 15  | 198 |
+		 |     |     |       0v |      |   |  9 || 10 | 0 | ALT5 | RxD3     | 16  | 199 |
+		 |   1 |   0 |     RxD2 | ALT5 | 0 | 11 || 12 | 0 | ALT3 | GPIO.1   | 1   | 7   |
+		 |   0 |   2 |     TxD2 | ALT5 | 0 | 13 || 14 |   |      | 0v       |     |     |
+		 |   3 |   3 |     CTS2 | ALT3 | 0 | 15 || 16 | 0 | ALT4 | GPIO.4   | 4   | 19  |
+		 |     |     |     3.3v |      |   | 17 || 18 | 0 | ALT4 | GPIO.5   | 5   | 18  |
+		 |  15 |  12 |     MOSI | ALT5 | 0 | 19 || 20 |   |      | 0v       |     |     |
+		 |  16 |  13 |     MISO | ALT5 | 0 | 21 || 22 | 0 | ALT3 | RTS2     | 6   | 2   |
+		 |  14 |  14 |     SCLK | ALT5 | 0 | 23 || 24 | 0 | ALT5 | CE0      | 10  | 13  |
+		 |     |     |       0v |      |   | 25 || 26 | 0 | ALT3 | GPIO.11  | 11  | 10  |
+		 +-----+-----+----------+------+---+---LEDs---+---+------+----------+-----+-----+
+		 |  17 |  30 | STAT-LED |  OUT | 0 | 27 || 28 |   |      | PWR-LED  |     |     |
+		 +-----+-----+----------+------+---+-----+----+---+------+----------+-----+-----+
+		 | H2+ | wPi |   Name   | Mode | V | Physical | V | Mode | Name     | wPi | H2+ |
+		 +-----+-----+----------+------+--Orange Pi Zero--+---+------+---------+-----+--+
+
+		 
+	'Configurar estado inicial de los pins'	 
+	# El pin usado para conectar el rele sera el pin 7 dado que nace en estado bajo (0.03v).
+	# Con el comando 'gpio readall' en la columna 'wpi' nos indicara el numero del gpio a usar, por ejemplo el (gpio 7)
+	# Editar archivo '/etc/rc.local' y agregar siguiente texto antes de la linea 'exit 0' y editarlo según convenga:
+	sudo nano /etc/rc.local
 	
+		#====================#
+		#    GPIO CONFIG     #
+		#====================#
+
+		# INSTRUCCIONES:
+		# 1. INSTALA DEL REPOSITORIO CORRESPONDIENTE A TU MPU (H2,, H3 O H5)
+		#    H2+   = https://github.com/xpertsavenue/WiringOP-Zero
+		#    H3-H5 = https://github.com/kazukioishi/WiringOP
+		#
+		# 2. USA COMANDO 'gpio readall' PARA SABER QUE GPIO ESTA ASIGNADO A CADA PIN
+		#
+		# 3. INDICA EL NUMERO DEL GPIO QUE VAS A USAR TAL COMO INDICA EL EJEMPLO
+		#    COPIA LA ESTRUCTURA POR CADA UNO DE LOS PINES QUE QUIERES USAR.
+		#
+		# 4. SI NECESITAS CAMBIAR EL ESTADO INICIAL DE UN PIN PUEDES AGREGAR LINEA
+		#    SIGUIENTE. DONDE 'X' ES EL PIN E 'Y' ES EL ESTADO.
+		#    sudo gpio write x y
+		
+		sudo gpio mode 7 out
+
+		#--FIN--#
+
+		
+'Plugins Octoprint'
+
+	'TouchUI'
+		http://plugins.octoprint.org/plugins/touchui/
+		
+	'Simple Emergency Stop'
+		https://github.com/BrokenFire/OctoPrint-SimpleEmergencyStop	
+	
+	'Navbar Temp'
+		https://github.com/imrahil/OctoPrint-NavbarTemp
+	
+	'OctoPrint-FloatingNavbar'
+		https://plugins.octoprint.org/plugins/floatingnavbar/
+	
+	'PSU CONTROL'
+		https://plugins.octoprint.org/plugins/psucontrol/
+	
+	'System Command Editor'
+		https://github.com/Salandora/OctoPrint-SystemCommandEditor
+	
+	'GCODE System Commands'
+		https://github.com/kantlivelong/OctoPrint-GCodeSystemCommands
+	
+	'GcodeEditor'
+		https://github.com/ieatacid/OctoPrint-GcodeEditor
+		
+	'Preheat Button'
+		https://github.com/marian42/octoprint-preheat
+	
+	'Firmware Updater'
+		https://plugins.octoprint.org/plugins/firmwareupdater/
+		
+	
+
+'LIMPIAR HISTORIAL Y CACHES'
+
+
+	'Borrar paquetes parciales'
+	sudo apt-get autoclean
+	
+	'Eliminar paquetes *.deb de las instalaciones'
+	sudo apt-get clean
+		
+	'Eliminar Paquetes y dependencias que el sistema ya no necesita'
+	sudo apt-get autoremove
+	sudo apt-get purge
+		
+	'Eliminar datos locales innecesarios'
+	sudo apt-get install localepurge
+	
+	'Historial de comandos'
+	history -c
+		
+	*Borrar a mano:
+	sudo nano /home/usuario/.bash_history
+
+
 	
 '=========FIN=========='	
 	
@@ -324,5 +475,9 @@
 					
 	`Samba y cifs`	https://help.ubuntu.com/community/Samba/SambaClientGuide
 					https://help.ubuntu.com/community/MountWindowsSharesPermanently
+					https://www.upv.es/contenidos/INFOACCESO/infoweb/infoacceso/dat/724147normalc.html
 					
-	
+	`GPIO`			http://www.orangepi.org/orangepibbsen/forum.php?mod=viewthread&tid=1308&highlight=gpio
+					https://diyprojects.io/orange-pi-armbian-install-wiringop-library-wiringpi-equivalent/#.WZf5iuntbRZ
+					
+
