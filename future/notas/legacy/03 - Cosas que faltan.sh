@@ -40,34 +40,6 @@ OK	+ Temperatura CPU
 	armbianmonitor -m
 
 
-		
-	+ CONTROL POR LA SALIDA DE SERVOS: VENTILADOR DE CAPA, LUCES... CON TRANSISTOR 2N2222
-	URL Uso 2N2222:	https://hetpro-store.com/TUTORIALES/transistor-2n2222-interruptor/?PageSpeed=noscript	
-	URL Code Marlin: https://github.com/MarlinFirmware/Marlin/wiki/M42	
-		M42 P4 S255	; Encender Ventilador de Capa
-	
-	
-	+ CONTROL DEL VENTILADOR DE LA CAJA POR TEMPERATURA
-		- 2 OPCIONES:	1º CONTROLADO POR UN ARDUINO TINY85 + SENSOR DE TEMPERATURA + 2N2222
-						2ª CONTROL POR CONEXION AUXILIAR DE LA RAMPS V1.4 + MOD MARLIN PARA LEER TERMISTOR
-						   Y ADECUAR LA SALIDA DE POTENCIA DEL VENTILADOR.
-						   http://www.reprap.org/wiki/Custom_GCODES_con_los_pines_AUX_de_la_tarjeta_RAMPS.
-						   https://lh3.googleusercontent.com/proxy/jUKopIgkMZuFOqi5ZZl7LVY4l7j73bBxImAgH6FUNz7K2K7Ysetx5d17O-VudJtBdz2VJ83ncMHqhropxkvy_pr9QNZORDaNnHcpzqfPQalStU3hpiwD=w5000-h5000
-						
-		
-
-	+ 2ª impresora:
-	su octoprint -c 'octoprint --daemon start --port 5001 --pid ~/tmp/octoprint2 --basedir ~/.octoprint2'
-	sudo update-rc.d octoprint2.sh defaults 
-
-	o asi?
-	
-		sudo su octoprint
-	octoprint --daemon start --port 5001 --pid /tmp/octoprint2
-	
-	---------------------------------------------------------------
-	
-
 OK	+ Liberar Espacio
 		https://www.ramonramon.org/blog/2015/11/03/liberar-espacio-en-la-particion-de-sistema-ubuntu/
 
@@ -124,7 +96,33 @@ OK //----------------------------------//
 
 
 		
+//	+ CONTROL POR LA SALIDA DE SERVOS: VENTILADOR DE CAPA, LUCES... CON TRANSISTOR 2N2222
+	URL Uso 2N2222:	https://hetpro-store.com/TUTORIALES/transistor-2n2222-interruptor/?PageSpeed=noscript	
+	URL Code Marlin: https://github.com/MarlinFirmware/Marlin/wiki/M42	
+		M42 P4 S255	; Encender Ventilador de Capa
+	
+	
+	+ CONTROL DEL VENTILADOR DE LA CAJA POR TEMPERATURA
+		- 2 OPCIONES:	1º CONTROLADO POR UN ARDUINO TINY85 + SENSOR DE TEMPERATURA + 2N2222
+						2ª CONTROL POR CONEXION AUXILIAR DE LA RAMPS V1.4 + MOD MARLIN PARA LEER TERMISTOR
+						   Y ADECUAR LA SALIDA DE POTENCIA DEL VENTILADOR.
+						   http://www.reprap.org/wiki/Custom_GCODES_con_los_pines_AUX_de_la_tarjeta_RAMPS.
+						   https://lh3.googleusercontent.com/proxy/jUKopIgkMZuFOqi5ZZl7LVY4l7j73bBxImAgH6FUNz7K2K7Ysetx5d17O-VudJtBdz2VJ83ncMHqhropxkvy_pr9QNZORDaNnHcpzqfPQalStU3hpiwD=w5000-h5000
+						
+		
 
+//	+ 2ª impresora:
+	su octoprint -c 'octoprint --daemon start --port 5001 --pid ~/tmp/octoprint2 --basedir ~/.octoprint2'
+	sudo update-rc.d octoprint2.sh defaults 
+
+	o asi?
+	
+		sudo su octoprint
+	octoprint --daemon start --port 5001 --pid /tmp/octoprint2
+	
+	---------------------------------------------------------------
+		
+		
 // xx: INSTALAR CURA-ENGINE
 	DESDE REPOSITORIO:
 		https://launchpad.net/~thopiekar/+archive/ubuntu/cura

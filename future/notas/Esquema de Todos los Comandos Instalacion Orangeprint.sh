@@ -1,9 +1,15 @@
-###
-# Esquema de Comandos Instalacion Orangeprint.
-# Desc: Instalacion Octoprint de cero, con entorno virtual.
-# by Carlymx - 20-01-2018
-# carlymx@gmail.com
-###
+###===========================================================###
+# Esquema de Comandos Instalacion Orangeprint.					#
+# Desc: Instalacion Octoprint de cero, con entorno virtual.		#
+# by Carlymx - 06-02-2018										#
+# carlymx@gmail.com												#
+###===========================================================###
+
+'Inicio del sitema por primera vez'
+	# Pregunta por la contraseña de root '1234' y luego pide que la cambies por una nueva 'orangeprint'.
+	# Pide el nombre para un nuevo usiario que llamaremos 'one'.
+	# Indica que 'one' es super usuario y pide reiniciar.
+
 
 'Configuración del Sistema'
 	
@@ -18,6 +24,10 @@
 		sudo armbian-config
 		 > Personal > Time Zone
 		
+	'Nombre del Dominio'
+	sudo armbian-config
+	 > Personal > Hostname > "orangeprint"
+
 	'Idioma'
 		sudo armbian-config
 		 > Personal > Locales > [es_ES.UTF-8 UTF-8] > [es_ES.UTF-8]
@@ -50,20 +60,16 @@
 		sudo dpkg-reconfigure keyboard-configuration
 		 > PC GENERICO 105 TECLAS > ESPAÑOL > ESPAÑOL > ALT DERECHO (AltGr) > CONTROL DERECHO
 	 
-	'Nombre del Dominio'
-	sudo armbian-config
-	 > Personal > Hostname > "orangeprint"
-	
-	
+
 	#### Notas del Sistema:
 	#
-		# Solución a problemas conexión SSH por WIFI en Windows:
-		# Desactivar el uso de IPv6 en la OPI
+	#	Solución a problemas conexión SSH por WIFI en Windows:
+	#	Desactivar el uso de IPv6 en la OPI
 		sudo nano /boot/cmdline.txt
 			ipv6.disable = 1
 		sudo /etc/init.d/networking restart
-	
-		# Temperatura CPU
+	#
+	#	Temperatura CPU
 		cat /sys/devices/virtual/thermal/thermal_zone0/temp
 		cat /etc/armbianmonitor/datasources/soctemp
 		armbianmonitor -m
@@ -75,8 +81,9 @@
 	
 	'Agregar Nuevo Usuario'
 	sudo adduser orangeprint
-	su orangeprint
-	cd ~
+	
+	'Eliminar usuario "one"'
+	sudo userdel -r one
 	
 	'Agregar usuario a Administradores'
 	sudo usermod -a -G tty orangeprint
@@ -88,13 +95,16 @@
 	
 	'Cambiar privilegios'
 	sudo visudo
-		**Activar `#includedir /etc/sudoers.d`
-
-	sudo nano /etc/sudoers.d/directivas
-		# Especificar privilegios de usuario
+		# Especificar privilegios de usuario al final del archivo.
 		orangeprint ALL=(ALL:ALL) ALL
 		orangeprint ALL=NOPASSWD: /sbin/shutdown
 		orangeprint ALL=(ALL) NOPASSWD:ALL
+	
+	# O Activar (si no lo esta).
+		>> #includedir /etc/sudoers.d
+	# y añadir priviliegios en:
+	sudo nano /etc/sudoers.d/orangeprint
+		
 
 	
 'Dependencias'
@@ -105,6 +115,10 @@
 	sudo apt-get install python-pip python-dev python-setuptools python-virtualenv virtualenv git libyaml-dev build-essential psmisc
 	sudo pip install -U pip
 	
+	'Acceder como usuario orangeprint'
+	su orangeprint
+	cd					# accedes al directorio personal directamente
+
 	'Dependencia PySerial'
 	wget https://pypi.python.org/packages/source/p/pyserial/pyserial-2.7.tar.gz
 	tar -zxf pyserial-2.7.tar.gz
@@ -115,17 +129,18 @@
 'Instalacion Octoprint (servidor de impresión)'
 
 	'Descarga Octoprint'
+	cd
 	git clone https://github.com/foosel/OctoPrint.git
 	cd OctoPrint
-	virtualenv venv		# Crear entorno Virtual
-	./venv/bin/python setup.py install
+	sudo virtualenv venv		# Crear entorno Virtual
+	sudo ./venv/bin/python setup.py install
 	mkdir ~/.octoprint
 
-	'**EXTRA: Actualizar octoprint (cuando proceda)**'
-	cd ~/OctoPrint/
-	git pull
-	./venv/bin/python setup.py clean
-	./venv/bin/python setup.py install
+		'**EXTRA: Actualizar octoprint (solo cuando proceda)**'
+		cd ~/OctoPrint/
+		git pull
+		sudo ./venv/bin/python setup.py clean
+		sudo ./venv/bin/python setup.py install
 
 	'Iniciar por primera vez el Octoprint'
 	~/OctoPrint/venv/bin/octoprint serve
@@ -133,18 +148,20 @@
 	'Inicio del Servidor Automaticamente'
 	sudo cp ~/OctoPrint/scripts/octoprint.init /etc/init.d/octoprint
 	sudo chmod +x /etc/init.d/octoprint
-
+	sudo update-rc.d /etc/init.d/octoprint defaults
+	
 	sudo cp ~/OctoPrint/scripts/octoprint.default /etc/default/octoprint
-		'Editar Ruta binario Octoprint'
+		`Editar Ruta binario Octoprint`
 		sudo nano /etc/default/octoprint
 
+			# CUIDADO hay que activar (descomentar) y modificar las siguientes lineas
+			# o si nos, no funcionara.
 			OCTOPRINT_USER=orangeprint
 			BASEDIR=/home/orangeprint/.octoprint
 			CONFIGFILE=/home/orangeprint/.octoprint/config.yaml
 			DAEMON=/home/orangeprint/OctoPrint/venv/bin/octoprint	
-	
-	sudo update-rc.d octoprint defaults
-
+		
+	reboot
 	
 	#### Notas sobre Octoprint:
 	#
@@ -155,7 +172,7 @@
 		systemctl status octoprint.service
 		journalctl -xe
 	
-	# DEPENDENCIAS OCTOPRINT 1.3.5 
+	# DEPENDENCIAS OCTOPRINT 1.3.6 
 		FUTURES 3.1.1
 		https://pypi.python.org/packages/cc/26/b61e3a4eb50653e8a7339d84eeaa46d1e93b92951978873c220ae64d0733/futures-3.1.1.tar.gz#md5=77f261ab86cc78efa2c5fe7be27c3ec8
 		
@@ -163,8 +180,6 @@
 		https://pypi.python.org/simple/wrapt/
 		https://pypi.python.org/packages/a0/47/66897906448185fcb77fc3c2b1bc20ed0ecca81a0f2f88eda3fc5a34fc3d/wrapt-1.10.11.tar.gz#md5=e1346f31782d50401f81c2345b037076
 	
-	# Eliminar la Contraseña de un Usuario:
-		sudo passwd usuario -d
 	#
 	#####	
 	
@@ -259,8 +274,7 @@
 		`Global`
 		wins support = yes
 		
-		'Share Definitions'
-		# Al final del archivo:
+		`Share Definitions`		# Al final del archivo:
 		[opiz_share]
 		comment= Carpeta compartida
 		path= /home/orangeprint/share
@@ -348,7 +362,8 @@
 	# Activar Led Rojo de la Placa
 	gpio write 30 1
 
-		 ###============Ejemplo de la respuesta del comando gpio readall==============###
+		 ###===========Ejemplo de la respuesta del comando 'gpio readall'=============###
+		 #						Para una Orange Pi Zero H2+								#
 		 +																				+
 		 +-----+-----+----------+------+--Orange Pi Zero--+---+------+---------+-----+--+
 		 | H2+ | wPi |   Name   | Mode | V | Physical | V | Mode | Name     | wPi | H2+ |
@@ -371,6 +386,38 @@
 		 +-----+-----+----------+------+---+-----+----+---+------+----------+-----+-----+
 		 | H2+ | wPi |   Name   | Mode | V | Physical | V | Mode | Name     | wPi | H2+ |
 		 +-----+-----+----------+------+--Orange Pi Zero--+---+------+---------+-----+--+
+		 
+		 
+		 ###===========Ejemplo de la respuesta del comando 'gpio readall'=============###
+		 #						Para una Orange Pi PC+ (H3)								#
+		 +																				+		 
+		 +-----+-----+----------+------+---+-Orange Pi+---+---+------+---------+-----+--+
+		 | BCM | wPi |   Name   | Mode | V | Physical | V | Mode | Name     | wPi | BCM |
+		 +-----+-----+----------+------+---+----++----+---+------+----------+-----+-----+
+		 |     |     |     3.3v |      |   |  1 || 2  |   |      | 5v       |     |     |
+		 |  12 |   8 |    SDA.0 | ALT3 | 0 |  3 || 4  |   |      | 5V       |     |     |
+		 |  11 |   9 |    SCL.0 | ALT3 | 0 |  5 || 6  |   |      | 0v       |     |     |
+		 |   6 |   7 |   GPIO.7 |  OUT | 0 |  7 || 8  | 0 | ALT3 | TxD3     | 15  | 13  |
+		 |     |     |       0v |      |   |  9 || 10 | 0 | ALT3 | RxD3     | 16  | 14  |
+		 |   1 |   0 |     RxD2 | ALT3 | 0 | 11 || 12 | 0 | ALT3 | GPIO.1   | 1   | 110 |
+		 |   0 |   2 |     TxD2 | ALT3 | 0 | 13 || 14 |   |      | 0v       |     |     |
+		 |   3 |   3 |     CTS2 | ALT3 | 0 | 15 || 16 | 0 | ALT3 | GPIO.4   | 4   | 68  |
+		 |     |     |     3.3v |      |   | 17 || 18 | 0 | ALT3 | GPIO.5   | 5   | 71  |
+		 |  64 |  12 |     MOSI | ALT3 | 0 | 19 || 20 |   |      | 0v       |     |     |
+		 |  65 |  13 |     MISO | ALT3 | 0 | 21 || 22 | 0 | ALT3 | RTS2     | 6   | 2   |
+		 |  66 |  14 |     SCLK | ALT3 | 0 | 23 || 24 | 0 | ALT3 | CE0      | 10  | 67  |
+		 |     |     |       0v |      |   | 25 || 26 | 0 | ALT3 | GPIO.11  | 11  | 21  |
+		 |  19 |  30 |    SDA.1 | ALT3 | 0 | 27 || 28 | 0 | ALT3 | SCL.1    | 31  | 18  |
+		 |   7 |  21 |  GPIO.21 | ALT3 | 0 | 29 || 30 |   |      | 0v       |     |     |
+		 |   8 |  22 |  GPIO.22 | ALT3 | 0 | 31 || 32 | 0 | ALT3 | RTS1     | 26  | 200 |
+		 |   9 |  23 |  GPIO.23 | ALT3 | 0 | 33 || 34 |   |      | 0v       |     |     |
+		 |  10 |  24 |  GPIO.24 | ALT3 | 0 | 35 || 36 | 0 | ALT3 | CTS1     | 27  | 201 |
+		 |  20 |  25 |  GPIO.25 | ALT3 | 0 | 37 || 38 | 0 | ALT3 | TxD1     | 28  | 198 |
+		 |     |     |       0v |      |   | 39 || 40 | 0 | ALT3 | RxD1     | 29  | 199 |
+		 +-----+-----+----------+------+---+----++----+---+------+----------+-----+-----+
+		 | BCM | wPi |   Name   | Mode | V | Physical | V | Mode | Name     | wPi | BCM |
+		 +-----+-----+----------+------+---+-Orange Pi+---+------+----------+-----+-----+
+
 
 		 
 	'Configurar estado inicial de los pins'	 
@@ -404,16 +451,29 @@
 		
 'Plugins Octoprint'
 
-	'TouchUI'					http://plugins.octoprint.org/plugins/touchui/
-		
-	'Simple Emergency Stop'		https://github.com/BrokenFire/OctoPrint-SimpleEmergencyStop	
+	'Cambiar permisos directorio ./venv'
+	# Si en la sección 'Plugin Manager' aparece un mensaje de error de accesi al comando `pip` debemos
+	# dar aceso total así:
+	sudo chmod -R 777 ./venv/
+
+
+	'Firmware Updater'			https://plugins.octoprint.org/plugins/firmwareupdater/
+		`Preinstalar`
+		sudo apt-get install avrdude		
 		`Configurar`
-		Emergency GCODE:	OCTO80
+			Path to avrdude:	/usr/bin/avrdude
+
+	'GCODE System Commands'		https://github.com/kantlivelong/OctoPrint-GCodeSystemCommands
+		`Configurar`
+		OCTO80	gpio write 7 0
+		OCTO81	gpio write 7 1
+		
+	'GcodeEditor'				https://github.com/ieatacid/OctoPrint-GcodeEditor
 	
 	'Navbar Temp'				https://github.com/imrahil/OctoPrint-NavbarTemp
 	
 	'OctoPrint-FloatingNavbar'	https://plugins.octoprint.org/plugins/floatingnavbar/
-	
+
 	'PSU CONTROL'				https://plugins.octoprint.org/plugins/psucontrol/
 		`Configurar`
 			`Switching`
@@ -428,7 +488,16 @@
 			`Power Off Options`
 			Automatically turn PSU OFF when idle 	CHECK
 			Idle TimeOut	10
-				
+
+	'Preheat Button'			https://github.com/marian42/octoprint-preheat
+		`Configurar`
+		Fallback temperature for tool preheating	200		# Para PLA
+		Fallback temperature for bed preheating		 50		# "		"
+		
+	'Simple Emergency Stop'		https://github.com/BrokenFire/OctoPrint-SimpleEmergencyStop	
+		`Configurar`
+		Emergency GCODE:	OCTO80
+		
 	'System Command Editor'		https://github.com/Salandora/OctoPrint-SystemCommandEditor
 		`Configurar`
 		Name:		Impresora On
@@ -450,27 +519,11 @@
 		Name:		WebCam Restart
 		Action:		Reiniciar Servidor Motion
 		Command:	sudo service motion restart
-
-				
-	'GCODE System Commands'		https://github.com/kantlivelong/OctoPrint-GCodeSystemCommands
-		`Configurar`
-		OCTO80	gpio write 7 0
-		OCTO81	gpio write 7 1
-	
-	'GcodeEditor'				https://github.com/ieatacid/OctoPrint-GcodeEditor
 		
-	'Preheat Button'			https://github.com/marian42/octoprint-preheat
-		`Configurar`
-		Fallback temperature for tool preheating	200		# Para PLA
-		Fallback temperature for bed preheating		 50		# "		"
-		
-	'Firmware Updater'			https://plugins.octoprint.org/plugins/firmwareupdater/
-		`Configurar`
-			Path to avrdude:	/usr/bin/avrdude
-
-		
+	'TouchUI'					http://plugins.octoprint.org/plugins/touchui/
 	
 
+		
 'LIMPIAR HISTORIAL Y CACHES'
 
 
@@ -494,6 +547,60 @@
 	sudo nano /home/usuario/.bash_history
 
 
+'========UTILIDADES=========='
+
+'Cambiar contraseña Usuario'
+	sudo passwd usuario
+
+'Eliminar contraseña Usuario'
+	sudo passwd usuario -d
+	
+'Ejecutar para el proximo arranque la adaptacion automatica de tamaño de la particion'
+	sudo systemctl enable resize2fs
+	reboot
+
+	# Si no funciona probar:
+	sudo systemctl enable resize2fs
+	sudo update-rc.d resize2fs defaults 	
+	reboot
+	
+'Copia Seguridad SD por USB'
+	# Conectar PEN o HDD al USB
+	# Para Saber si lo detecto y ver la particion 
+	fDisk -l
+	
+	# Crear Directorio
+	mkdir /media/USB
+	# Montar USB
+	mount /dev/sda1	/media/USB		# Donde sda1 el la particion que queremos montar que vimos en el fdisk -l
+	
+	# Desmontar Unidades a copiar
+	sudo umount /dev/mmcblk0p1
+	
+	# Iniciar Copia de Seguridad
+	sudo dd if=/dev/mmcblk0 of=/media/USB/mibackup.img bs=1M
+	
+'Cambiar Tamaño Particion dentro de una *.img'	
+https://softwarebakery.com/shrinking-images-on-linux
+
+	# En una maquina Linux, cargar la imagen "*.img":
+	sudo modprobe loop
+	sudo losetup -f
+	sudo losetup /dev/loop0 myimage.img
+	sudo partprobe /dev/loop0
+	
+	# Contraer particion con GParted
+	sudo gparted /dev/loop0
+	https://softwarebakery.com/shrinking-images-on-linux/gparted-01.png
+	
+	# Desmontar la imagen
+	sudo losetup -d /dev/loop0
+	
+	# Saber los bloque y el tamaño de bloques del espacio particionado
+	sudo losetup -d /dev/loop0
+	
+	# Recortar el espacio sin particionar de la imagen
+	truncate --size=$[(????????+1)*512] myimage.img
 	
 '=========FIN=========='	
 	
@@ -515,4 +622,12 @@
 	`GPIO`			http://www.orangepi.org/orangepibbsen/forum.php?mod=viewthread&tid=1308&highlight=gpio
 					https://diyprojects.io/orange-pi-armbian-install-wiringop-library-wiringpi-equivalent/#.WZf5iuntbRZ
 					
-
+	`resize2fs`		https://forum.armbian.com/topic/487-reinitiate-sd-card-resize-on-boot/?do=findComment&comment=28814
+					https://forum.armbian.com/topic/3783-orange-pi-lite-freezes/?do=findComment&comment=27487
+					
+					
+					
+					
+					
+					
+	
