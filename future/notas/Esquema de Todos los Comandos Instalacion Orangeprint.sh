@@ -1,14 +1,14 @@
 ###===========================================================###
-# Esquema de Comandos Instalacion Orangeprint.					#
-# Desc: Instalacion Octoprint de cero, con entorno virtual.		#
+# Esquema de Comandos Instalación Orangeprint.					#
+# Desc: Instalación Octoprint de cero, con entorno virtual.		#
 # by Carlymx - 06-02-2018										#
 # carlymx@gmail.com												#
 ###===========================================================###
 
 'Inicio del sitema por primera vez'
 	# Pregunta por la contraseña de root '1234' y luego pide que la cambies por una nueva 'orangeprint'.
-	# Pide el nombre para un nuevo usiario que llamaremos 'one'.
-	# Indica que 'one' es super usuario y pide reiniciar.
+	# Pide el nombre para un nuevo usuario que llamaremos 'orangeprint' y contraseña 'orangeprint'.
+	# Indica que 'orangeprint' es super usuario y pide reiniciar.
 
 
 'Configuración del Sistema'
@@ -56,7 +56,7 @@
 			en_US.UTF-8 UTF-8
 
 	'Configurar Teclado'
-		"IMPORTANTE: Conectar un Teclado Fisico o no funcionara"
+		"IMPORTANTE: Conectar un Teclado Físico o no funcionara"
 		sudo dpkg-reconfigure keyboard-configuration
 		 > PC GENERICO 105 TECLAS > ESPAÑOL > ESPAÑOL > ALT DERECHO (AltGr) > CONTROL DERECHO
 	 
@@ -199,7 +199,7 @@
 	sudo nano /etc/motion/motion.conf
 		
 		`Daemon`
-			daemon on # --------------------------- Permite la auto-ejecucion en el arranque del sistema 
+			daemon on # --------------------------- Permite la auto-ejecución en el arranque del sistema 
 		
 		`Capture device options`
 			v4l2_palette 15 # --------------------- Tipo de paleta de color soportada por tu WebCam, usar 'v4l2-ctl --list-formats-ext'
@@ -215,7 +215,7 @@
 
 		`Live Stream Server`
 			stream_motion on #--------------------- Cuando no detecta movimiento ir a 1 fps
-			stream_maxrate 12 #-------------------- Cuando detecta movimeinto ir max 12 fps
+			stream_maxrate 12 #-------------------- Cuando detecta movimiento ir max 12 fps
 			stream_localhost off #----------------- No restringir el streaming a equipo local
 
 		`HTTP Based Control`
@@ -227,7 +227,7 @@
 	'Configurar inicio del servicio'
 	sudo nano /etc/default/motion
 
-		# Para que el servicio pueda iniciarse debemos cambiar esta opcion a 'yes'
+		# Para que el servicio pueda iniciarse debemos cambiar esta opción a 'yes'
 		start_motion_daemon = yes
 	
 	sudo service motion start
@@ -238,7 +238,7 @@
 	# Control del Servicio Motion
 		sudo service motion start|stop|restart
 	
-	# Motion guarda por defecto videos e imagenes en /var/bin/motion/motion
+	# Motion guarda por defecto vídeos e imágenes en /var/bin/motion/motion
 	# Para saber el tamaño que ocupa ese directorio:
 		du -shc /var/lib/motion/
 	
@@ -422,7 +422,7 @@
 
 		 
 	'Configurar estado inicial de los pins'	 
-	# El pin usado para conectar el rele sera el pin 7 dado que nace en estado bajo (0.03v).
+	# El pin usado para conectar el relé sera el pin 7 dado que nace en estado bajo (0.03v).
 	# Con el comando 'gpio readall' en la columna 'wpi' nos indicara el numero del gpio a usar, por ejemplo el (gpio 7)
 	# Editar archivo '/etc/rc.local' y agregar siguiente texto antes de la linea 'exit 0' y editarlo según convenga:
 	sudo nano /etc/rc.local
@@ -453,8 +453,8 @@
 'Plugins Octoprint'
 
 	'Cambiar permisos directorio ./venv'
-	# Si en la sección 'Plugin Manager' aparece un mensaje de error de accesi al comando `pip` debemos
-	# dar aceso total así:
+	# Si en la sección 'Plugin Manager' aparece un mensaje de error de acceso al comando `pip` debemos
+	# dar acceso total así:
 	sudo chmod -R 777 ./venv/
 
 
@@ -567,13 +567,13 @@
 	
 'Copia Seguridad SD por USB'
 	# Conectar PEN o HDD al USB
-	# Para Saber si lo detecto y ver la particion 
+	# Para Saber si lo detecto y ver la partición 
 	fDisk -l
 	
 	# Crear Directorio
 	mkdir /media/USB
 	# Montar USB
-	mount /dev/sda1	/media/USB		# Donde sda1 el la particion que queremos montar que vimos en el fdisk -l
+	mount /dev/sda1	/media/USB		# Donde sda1 el la partición que queremos montar que vimos en el fdisk -l
 	
 	# Desmontar Unidades a copiar
 	sudo umount /dev/mmcblk0p1
@@ -590,7 +590,7 @@ https://softwarebakery.com/shrinking-images-on-linux
 	sudo losetup /dev/loop0 myimage.img
 	sudo partprobe /dev/loop0
 	
-	# Contraer particion con GParted
+	# Contraer partición con GParted
 	sudo gparted /dev/loop0
 	https://softwarebakery.com/shrinking-images-on-linux/gparted-01.png
 	
