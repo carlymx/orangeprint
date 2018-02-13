@@ -77,20 +77,15 @@
 	####
 
 
-'Nuevo Usuario'
+'Configurar Usuario'
 	
-	'Agregar Nuevo Usuario'
-	sudo adduser orangeprint
-	
-	'Eliminar usuario "one"'
-	sudo userdel -r one
-	
-	'Agregar usuario a Administradores'
+	'Agregar usuario `orangeprint´ a Administradores'
 	sudo usermod -a -G tty orangeprint
 	sudo usermod -a -G dialout orangeprint
 	sudo adduser orangeprint sudo
 
 	'Activar el reinicio para este usuario'
+	su orangeprint
 	systemctl reboot -i
 	
 	'Cambiar privilegios'
@@ -102,10 +97,12 @@
 	
 	# O Activar (si no lo esta).
 		>> #includedir /etc/sudoers.d
-	# y añadir priviliegios en:
+	# y añadir privilegios en:
 	sudo nano /etc/sudoers.d/orangeprint
 		
-
+	'Agregar Nuevo Usuario'
+	# En caso que se quiera o se necesite tener un tercer usuario, vasta con agregarlo:
+	sudo adduser usuario
 	
 'Dependencias'
 
