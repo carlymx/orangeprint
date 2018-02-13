@@ -132,7 +132,7 @@
 	cd
 	git clone https://github.com/foosel/OctoPrint.git
 	cd OctoPrint
-	sudo virtualenv venv		# Crear entorno Virtual
+	virtualenv venv		# Crear entorno Virtual
 	sudo ./venv/bin/python setup.py install
 	mkdir ~/.octoprint
 
@@ -144,6 +144,8 @@
 
 	'Iniciar por primera vez el Octoprint'
 	~/OctoPrint/venv/bin/octoprint serve
+	# Una vez comprobado que funciona accediendo por el navegador web a la IP de la OPI ( ej: xx.xx.xx.xx:5000)
+	# puede cerrarse el servidor octoprint para desbloquear el terminal pulsando 'CTrl+Z'
 	
 	'Inicio del Servidor Automaticamente'
 	sudo cp ~/OctoPrint/scripts/octoprint.init /etc/init.d/octoprint
@@ -152,14 +154,13 @@
 	
 	sudo cp ~/OctoPrint/scripts/octoprint.default /etc/default/octoprint
 		`Editar Ruta binario Octoprint`
-		sudo nano /etc/default/octoprint
-
-			# CUIDADO hay que activar (descomentar) y modificar las siguientes lineas
-			# o si nos, no funcionara.
-			OCTOPRINT_USER=orangeprint
-			BASEDIR=/home/orangeprint/.octoprint
-			CONFIGFILE=/home/orangeprint/.octoprint/config.yaml
-			DAEMON=/home/orangeprint/OctoPrint/venv/bin/octoprint	
+			sudo nano /etc/default/octoprint
+				# CUIDADO hay que activar (descomentar) y modificar las siguientes lineas
+				# o si nos, no funcionara.
+				OCTOPRINT_USER=orangeprint
+				BASEDIR=/home/orangeprint/.octoprint
+				CONFIGFILE=/home/orangeprint/.octoprint/config.yaml
+				DAEMON=/home/orangeprint/OctoPrint/venv/bin/octoprint	
 		
 	reboot
 	
