@@ -19,8 +19,33 @@ La Idea poco a poco y si gusta el proyecto y obtengo apoyos, es crear una WIKI d
 
 De momento les dejo con las principales características incluidas en la primera versión de este mi humilde trabajo para la comunidad.
 
-### Características v1.0
+## Changelog:
 
+v1.1.1-H2+ (10 Mayo 2018)
+
+### Upgrades:
+- ARMbian v5.38 stable
+- Ubuntu 16.04.4 LTS (4.14.18-sunxi)
+- Octoprint 1.38.0
+- pip v10.0.1
+
+### Fix:
+- #2 [ERROR] "30: Read-only filesystem" - Fix
+
+### Changes:
+
+- Había un error en la v1.1 (H2+) que aveces imposibilitaba el correcto reajuste del tamaño de la partición y no iniciaba el sistema.
+- Se ha eliminado el comando de reajuste automático en esta versión.
+- Para Ajustar la partición al máximo espacio disponible de la tarjeta SD usén este comando en su primer inicio:
+
+		- Inicie como root (pass: orangeprint)
+		" sudo systemctl enable resize2fs "
+		" reboot "
+
+
+
+
+v1.0 H2+
 * ARMBian v5.35 server - Ubuntu xenial 3.4.113.
 	* Ultima actualización (12-01-2018).
 	* Redimensiona (dilata) la partición al maximo disponible en nuestra SD con nuestro primer reinicio.
