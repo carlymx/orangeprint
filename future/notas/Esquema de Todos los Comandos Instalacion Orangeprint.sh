@@ -1,9 +1,15 @@
 ###===========================================================###
-# Esquema de Comandos Instalación Orangeprint.					#
-# Desc: Instalación Octoprint de cero, con entorno virtual.		#
-# by Carlymx - 06-02-2018										#
-# carlymx@gmail.com												#
+# Esquema de Comandos Instalación Orangeprint.                  #
+# Desc: Instalación Octoprint de cero, con entorno virtual.     #
+# by Carlymx - 06-02-2018 # Ultima Actualización [17-09-2018]   #
+# carlymx@gmail.com                                             #
 ###===========================================================###
+
+'Descarga e Instalación'
+	> Descargar versiones ARMbian en: https://www.armbian.com/download/
+	> Instalar imagen ***.img a una microSD (minimo 4GBs) con RUFUS https://rufus.akeo.ie (probado con v2.18 https://rufus.akeo.ie/downloads/rufus-2.18p.exe ).
+		> Crear Disco de arranque con: Imagen DD >Seleccionar xxx.img y Empezar
+
 
 'Inicio del sitema por primera vez'
 	# Pregunta por la contraseña de root '1234' y luego pide que la cambies por una nueva 'orangeprint'.
@@ -111,6 +117,8 @@
 	sudo apt-get upgrade
 	sudo apt-get install python-pip python-dev python-setuptools python-virtualenv virtualenv git libyaml-dev build-essential psmisc
 	sudo pip install -U pip
+		# Para saber la versión de pip que tenemos:
+		> sudo pip --version
 	
 	'Acceder como usuario orangeprint'
 	su orangeprint
@@ -170,7 +178,7 @@
 		systemctl status octoprint.service
 		journalctl -xe
 	
-	# DEPENDENCIAS OCTOPRINT 1.3.6 
+	# DEPENDENCIAS OCTOPRINT 1.3.6+ 
 		FUTURES 3.1.1
 		https://pypi.python.org/packages/cc/26/b61e3a4eb50653e8a7339d84eeaa46d1e93b92951978873c220ae64d0733/futures-3.1.1.tar.gz#md5=77f261ab86cc78efa2c5fe7be27c3ec8
 		
@@ -183,17 +191,82 @@
 	
 
 'Instalacion de Motion (servidor para WebCam)'
-
+	# Repositorio GitHub: https://github.com/Motion-Project/motion
+	# Guia Instalacion completa: https://github.com/Motion-Project/motion/blob/release-4.1/motion_guide.html
+	# Guia version offline: https://motion-project.github.io/motion_guide.html
+	
 	'Previo'
 	sudo apt-get update
 	sudo apt-get upgrade
 	lsusb					# Para saber si la WebCam esta conectada
 
 	'Instalar Motion'
-	sudo apt-get install motion
+	# Se puede Instalar la versión del repositorio de Ubunto (acualmente la v3.2.12 del 2009, perfectamente funcional)
+	# o Instalar la ultima version desde el repositorio de GitHub, que sera el caso.
 	
+		'Instalacion de Motion Repo de Ubuntu v3.2.12'
+		sudo apt-get install motion
+	
+		'Instalacion de Motion Repo de GitHub v4.1.1'
+		sudo apt-get install autoconf automake build-essential pkgconf libtool libzip-dev libjpeg-dev git libavformat-dev libavcodec-dev libavutil-dev libswscale-dev libavdevice-dev libmicrohttpd-dev
+		cd ~ 
+		git clone https://github.com/Motion-Project/motion.git 
+		cd motion 
+		autoreconf -fiv 
+		./configure 
+		make 
+		sudo make install 
+	
+			## Una vez Instalado correctamente nos dira lo siguiente:
+			## Install complete! The default configuration file, motion-dist.conf, has been
+			## installed to /usr/local/etc/motion. You need to rename/copy it to motion.conf
+			## for Motion to find it. More configuration examples as well as init scripts
+			## can be found in /usr/local/share/motion/examples.
+
+			
 	'Configurar Motion'
-	sudo nano /etc/motion/motion.conf
+	
+	> Para +4.1
+	
+	sudo cp /usr/local/etc/motion/motion-dist.conf /usr/local/etc/motion/motion.conf
+	sudo nano /usr/local/etc/motion/motion.conf
+	## ¡¡ El archivo de configuración el a v+4.x.x ha sido simplificado pero motion tiene todos sus parametros con una variable por defecto.
+	## Agregar lineas faltantes en el caso que se quiera modificar el defecto de la variable.
+	## En la guia de instalación estan todas las variables.
+	
+		`Daemon`
+			daemon on # --------------------------- Permite la auto-ejecución en el arranque del sistema 
+		
+		'Image Processing configuration parameters'
+			v4l2_palette 15 # --------------------- Tipo de paleta de color soportada por tu WebCam, usar 'v4l2-ctl --list-formats-ext'
+			width 640 # --------------------------- Resolucion (Ancho) usar 'uvcdynctrl -f'
+			height 360 # -------------------------- Resolucion (Alto) usar 'uvcdynctrl -f'
+			framerate 15 # ------------------------ Fps de la captura del video
+			
+		'Picture output configuration parameters'
+		`Output pictures when motion is detected`
+			output_pictures off # --------------- No Guardes imagenes
+		
+		'Movie output configuration parameters'
+		`Create movies of motion events.`
+			movie_output off # ---------- No Guardes Videos
+
+		'Live stream configuration parameters'
+		`Live Stream Server`
+			stream_motion on #--------------------- Cuando no detecta movimiento ir a 1 fps
+			stream_maxrate 12 #-------------------- Cuando detecta movimiento ir max 12 fps
+			stream_localhost off #----------------- No restringir el streaming a equipo local
+			
+		'Webcontrol configuration parameters'
+		`HTTP Based Control`
+			webcontrol_port 8080 # ---------------- Puerto de acceso
+			webcontrol_localhost off # ------------ Para poder acceder desde cualquier 
+			webcontrol_html_output on # ----------- Para poder controlar y configurar el Motion por Web
+			
+						
+	> Para v3.2.12 	
+		
+		sudo nano /etc/motion/motion.conf
 		
 		`Daemon`
 			daemon on # --------------------------- Permite la auto-ejecución en el arranque del sistema 
@@ -222,6 +295,23 @@
 	
 	
 	'Configurar inicio del servicio'
+	
+	> Para v4.1.x
+	
+		# Crear Usuario Motion
+		sudo adduser motion #---------------------- Crea el usuario, seguir instrucciones, password= motion
+		sudo adduser motion sudo #----------------- Da poderes administrativos al usuario.
+		sudo usermod motion -G video #------------- ¡IMPORTANTE! Agrega al usuario al grupo de usuarios 'video' y lo establece omo primario.
+		
+		# Copiar y renombrar Script
+		cp /usr/local/share/motion/examples/motion.init-Debian /etc/int.d/motion
+		
+		# Añadir a lista de tareas el Inicio del Servicio Motion al reiniciar.
+		sudo crontab -e
+		@reboot sudo /etc/init.d/motion start
+	
+	> Para v3.2.12
+	
 	sudo nano /etc/default/motion
 
 		# Para que el servicio pueda iniciarse debemos cambiar esta opción a 'yes'
@@ -230,21 +320,23 @@
 	sudo service motion start
 
 
+	
 	#### Notas sobre Motion:
-	#
-	# Control del Servicio Motion
-		sudo service motion start|stop|restart
-	
-	# Motion guarda por defecto vídeos e imágenes en /var/bin/motion/motion
-	# Para saber el tamaño que ocupa ese directorio:
-		du -shc /var/lib/motion/
-	
-	# Para borrar el contenido:
-		sudo rm -r /var/lib/motion/
 
 	# Para configurar y controlar el Motion acceder por web:
 		http://192.168.0.105:8080
 	
+	# Control del Servicio Motion
+		sudo service motion start|stop|restart
+	
+	> Para 3.2.12
+		# Motion guarda por defecto vídeos e imágenes en /var/bin/motion/motion
+		# Para saber el tamaño que ocupa ese directorio:
+			du -shc /var/lib/motion/
+		
+		# Para borrar el contenido:
+			sudo rm -r /var/lib/motion/
+
 	# Utilidades para saber los formatos y Resoluciones soportadas por nuestra Webcam:
 		sudo apt-get install v4l-utils libv4l-0
 			v4l2-ctl
@@ -452,7 +544,7 @@
 	'Cambiar permisos directorio ./venv'
 	# Si en la sección 'Plugin Manager' aparece un mensaje de error de acceso al comando `pip` debemos
 	# dar acceso total así:
-	sudo chmod -R 777 ./venv/
+	sudo chmod -R 777 /home/orangeprint/Octoprint/venv/
 
 
 	'Firmware Updater'			https://plugins.octoprint.org/plugins/firmwareupdater/
@@ -508,11 +600,11 @@
 		
 		Name:		WebCam ON
 		Action:		Iniciar Servidor Motion
-		Command:	sudo service motion start
+		Command:	sudo /etc/init.d/motion start
 
 		Name:		WebCam OFF
 		Action:		Detener Servidor Motion
-		Command:	sudo service motion stop|restart
+		Command:	sudo service motion stop|restart || sudo killall motion
 		
 		Name:		WebCam Restart
 		Action:		Reiniciar Servidor Motion
