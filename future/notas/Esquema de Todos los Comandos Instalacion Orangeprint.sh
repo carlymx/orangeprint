@@ -120,6 +120,19 @@
 		# Para saber la versión de pip que tenemos:
 		> sudo pip --version
 	
+	# PYTHON 3 #
+	# Desde el 1 de Enero del 2020 Python 2.7 a pasado a ser EOL [(leer articulo)](https://www.python.org/doc/sunset-python-2/)
+	# Es necesario empezar a usar Python 3 con las instalaciones de Octoprint, pero actualmente muchos complementos pueden no ser compatibles para Python 3.
+	'Instalar Dependencias Python 3'
+	
+	
+	'Coexistencia Python2 y Python3'
+	# Python2 (/usr/bin/python) tiene asignado el **alias** *python* y *python2*
+	# Python3 (usr/bin/python3) tiene asignado el **alias** *python3*
+	# Puede asignarse un nuevo alias con [```alias python=python3```][alias]
+	
+	
+	
 	'Acceder como usuario orangeprint'
 	su orangeprint
 	cd					# accedes al directorio personal directamente
@@ -715,9 +728,9 @@ https://softwarebakery.com/shrinking-images-on-linux
 	`resize2fs`		https://forum.armbian.com/topic/487-reinitiate-sd-card-resize-on-boot/?do=findComment&comment=28814
 					https://forum.armbian.com/topic/3783-orange-pi-lite-freezes/?do=findComment&comment=27487
 					
+	`Sintaxis MarkDown`	https://markdown.es/sintaxis-markdown/
 					
-					
-					
-					
+# Enlaces cortes:					
+[alias]: https://www.enmimaquinafunciona.com/pregunta/24690/por-defecto-python-comando-a-usar-python-3
 					
 	
