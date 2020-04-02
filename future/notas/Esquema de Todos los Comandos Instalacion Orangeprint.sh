@@ -1,10 +1,10 @@
 ###===========================================================###
 # Esquema de Comandos Instalación Orangeprint.                  #
 # Desc: Instalación Octoprint de cero, con entorno virtual.     #
-# by Carlymx - 06-02-2018 # Ultima Actualización [01-04-2020]   #
+# by Carlymx - 06-02-2018 # Ultima Actualización [02-04-2020]   #
 # carlymx@gmail.com                                             #
 ###===========================================================###
-@1Qwerty1@
+
 'Descarga e Instalación'
 	> Descargar versiones ARMbian en: https://www.armbian.com/download/
 	> Instalar imagen ***.img a una microSD (minimo 4GBs) con RUFUS https://rufus.akeo.ie (probado con v2.18 https://rufus.akeo.ie/downloads/rufus-2.18p.exe ).
