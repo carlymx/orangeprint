@@ -1,10 +1,10 @@
 ###===========================================================###
 # Esquema de Comandos Instalación Orangeprint.                  #
 # Desc: Instalación Octoprint de cero, con entorno virtual.     #
-# by Carlymx - 06-02-2018 # Ultima Actualización [17-09-2018]   #
+# by Carlymx - 06-02-2018 # Ultima Actualización [01-04-2020]   #
 # carlymx@gmail.com                                             #
 ###===========================================================###
-
+@1Qwerty1@
 'Descarga e Instalación'
 	> Descargar versiones ARMbian en: https://www.armbian.com/download/
 	> Instalar imagen ***.img a una microSD (minimo 4GBs) con RUFUS https://rufus.akeo.ie (probado con v2.18 https://rufus.akeo.ie/downloads/rufus-2.18p.exe ).
@@ -113,36 +113,55 @@
 'Dependencias'
 
 	'Instalar Dependencias'
-	sudo apt-get update
-	sudo apt-get upgrade
-	sudo apt-get install python-pip python-dev python-setuptools python-virtualenv virtualenv git libyaml-dev build-essential psmisc
+	sudo apt update
+	sudo apt upgrade
+	sudo apt install python-pip python-dev python-setuptools python-virtualenv virtualenv git libyaml-dev build-essential psmisc
 	sudo pip install -U pip
 		# Para saber la versión de pip que tenemos:
 		> sudo pip --version
+        # Para saber las bibliotecas instaladas:
+        > python -m pip list
+        > python3 -m pip list
 	
 	# PYTHON 3 #
 	# Desde el 1 de Enero del 2020 Python 2.7 a pasado a ser EOL [(leer articulo)](https://www.python.org/doc/sunset-python-2/)
 	# Es necesario empezar a usar Python 3 con las instalaciones de Octoprint, pero actualmente muchos complementos pueden no ser compatibles para Python 3.
 	'Instalar Dependencias Python 3'
-	
+	sudo apt install python3-pip python3-dev python3-setuptools python3-virtualenv
+    sudo pip3 install -U pip
+    sudo pip3 install virtualenv
 	
 	'Coexistencia Python2 y Python3'
 	# Python2 (/usr/bin/python) tiene asignado el **alias** *python* y *python2*
 	# Python3 (usr/bin/python3) tiene asignado el **alias** *python3*
-	# Puede asignarse un nuevo alias con [```alias python=python3```][alias]
-	
-	
+	# Puede asignarse un nuevo alias con [```alias python=python3```][alias_python] y [```alias pip=pip3```][alias_pip], para hacerlo permanenete editar archivo '~/.bashrc':
+
+        sudo nano ~/.bashrc
+            # Al final del Archivo:
+                #ALIAS PARA PYTHON Y PIP
+                alias python="python3"
+                alias pip="pip3"
+    # Para comprobar la version:
+    python -V
+    pip -V
+            
 	
 	'Acceder como usuario orangeprint'
 	su orangeprint
 	cd					# accedes al directorio personal directamente
 
-	'Dependencia PySerial'
+	'Dependencia PySerial (Python 2.7)'
 	wget https://pypi.python.org/packages/source/p/pyserial/pyserial-2.7.tar.gz
 	tar -zxf pyserial-2.7.tar.gz
 	cd pyserial-2.7
 	sudo python setup.py install
 	
+    'Dependencias PySerial (Python 3)'
+    sudo pip install pyserial==2.7
+
+    'Dependencias PySerial (Python 3)'
+    sudo pip install pyserial
+
 	
 'Instalacion Octoprint (servidor de impresión)'
 
@@ -150,8 +169,12 @@
 	cd
 	git clone https://github.com/foosel/OctoPrint.git
 	cd OctoPrint
-	virtualenv venv		# Crear entorno Virtual
-	sudo ./venv/bin/python setup.py install
+    # Para Python 2
+	    virtualenv venv		# Crear entorno Virtual
+	# Para Python 3 [Entorno Virtual con Python3][virtual_python3]
+        virtualenv -p /usr/bin/python3 --python=python3 venv
+
+    sudo ./venv/bin/python setup.py install
 	mkdir ~/.octoprint
 
 		'**EXTRA: Actualizar octoprint (solo cuando proceda)**'
@@ -163,12 +186,36 @@
 	'Iniciar por primera vez el Octoprint'
 	~/OctoPrint/venv/bin/octoprint serve
 	# Una vez comprobado que funciona accediendo por el navegador web a la IP de la OPI ( ej: xx.xx.xx.xx:5000)
+    # Configure los parametros Iniciales
+    'Access Control'
+    Username:   orangeprint
+    Password:   orangeprint
+    ENABLE
+
+    'Configure Anonymous Usage Tracking'
+    DISABLE
+
+    'Configure the connectivity check'
+    ENABLE
+
+    'Configure plugin blacklist processing'
+    ENABLE  #Para python 3
+
+    'Set up your printer profile'
+    Al Gusto...
+    
+    'Server Commands'
+    Restart Octoprint:  sudo service octoprint restart
+    Restart System:     reboot
+    Shutdown System:    poweroff
+    
 	# puede cerrarse el servidor octoprint para desbloquear el terminal pulsando 'CTrl+Z'
 	
 	'Inicio del Servidor Automaticamente'
+    cd
 	sudo cp ~/OctoPrint/scripts/octoprint.init /etc/init.d/octoprint
 	sudo chmod +x /etc/init.d/octoprint
-	sudo update-rc.d /etc/init.d/octoprint defaults
+	sudo update-rc.d octoprint defaults
 	
 	sudo cp ~/OctoPrint/scripts/octoprint.default /etc/default/octoprint
 		`Editar Ruta binario Octoprint`
@@ -180,7 +227,7 @@
 				CONFIGFILE=/home/orangeprint/.octoprint/config.yaml
 				DAEMON=/home/orangeprint/OctoPrint/venv/bin/octoprint	
 		
-	reboot
+	Guardar y Reiniciar Sistema
 	
 	#### Notas sobre Octoprint:
 	#
@@ -209,8 +256,8 @@
 	# Guia version offline: https://motion-project.github.io/motion_guide.html
 	
 	'Previo'
-	sudo apt-get update
-	sudo apt-get upgrade
+	sudo apt update
+	sudo apt upgrade
 	lsusb					# Para saber si la WebCam esta conectada
 
 	'Instalar Motion'
@@ -218,10 +265,10 @@
 	# o Instalar la ultima version desde el repositorio de GitHub, que sera el caso.
 	
 		'Instalacion de Motion Repo de Ubuntu v3.2.12'
-		sudo apt-get install motion
+		sudo apt install motion
 	
 		'Instalacion de Motion Repo de GitHub v4.1.1'
-		sudo apt-get install autoconf automake build-essential pkgconf libtool libzip-dev libjpeg-dev git libavformat-dev libavcodec-dev libavutil-dev libswscale-dev libavdevice-dev libmicrohttpd-dev
+		sudo apt install autoconf automake build-essential pkgconf libtool libzip-dev libjpeg-dev git libavformat-dev libavcodec-dev libavutil-dev libswscale-dev libavdevice-dev libmicrohttpd-dev
 		cd ~ 
 		git clone https://github.com/Motion-Project/motion.git 
 		cd motion 
@@ -351,13 +398,13 @@
 			sudo rm -r /var/lib/motion/
 
 	# Utilidades para saber los formatos y Resoluciones soportadas por nuestra Webcam:
-		sudo apt-get install v4l-utils libv4l-0
+		sudo apt install v4l-utils libv4l-0
 			v4l2-ctl
 			v4l2-ctl --all
 			v4l2-ctl --list-formats
 			v4l2-ctl --list-formats-ext
 	
-		sudo apt-get install uvcdynctrl
+		sudo apt install uvcdynctrl
 			uvcdynctrl -f	# Lista Resoluciones soportadas por la WebCam de manera nativa (por Hardware)
 			uvcdynctrl -l
 	#
@@ -366,7 +413,7 @@
 'Servidor SAMBA (compartir directorios con la Red)'
 	
 	'Instalar Samba'
-	sudo apt-get install samba samba-common-bin
+	sudo apt install isc-dhcp-client samba samba-common-bin
 		
 	'Crear directorios a compartir'	
 	mkdir /home/orangeprint/share
@@ -378,6 +425,10 @@
 		wins support = yes
 		
 		`Share Definitions`		# Al final del archivo:
+
+    #####################################
+    #       Directorios Compartidos     #
+    #####################################
 		[opiz_share]
 		comment= Carpeta compartida
 		path= /home/orangeprint/share
@@ -419,15 +470,17 @@
 			
 	'Poner una contraseña al usuario'
 	sudo smbpasswd -a root
-	sudo smbpasswd -a orangeprint
-	
+        password:   orangeprint	
+    sudo smbpasswd -a orangeprint
+        password:   orangeprint	
+
 	'Reiniciar servidor Samba'
-	sudo /etc/init.d/samba restart
+	sudo service smbd restart
 	
 
 'Acceder a directorio externo'	
 	
-	sudo apt-get install cifs-utils nfs-common
+	sudo apt install cifs-utils nfs-common
 	
 	mkdir /home/orangeprint/.octoprint/uploads/shared
 	chmod 777 /home/orangeprint/.octoprint/uploads/shared
@@ -438,6 +491,9 @@
 
 
 'GPIO: control de Relés para encender y apagar la Impresora'
+
+    ## Hechar un vistazo al nuevo repositorio del fabricante de la OrangePi
+        ##  https://github.com/orangepi-xunlong/wiringOP  ##
 
 	'WIRINGOP (MPU H3 y H5)'
 	# https://github.com/kazukioishi/WiringOP
@@ -557,19 +613,38 @@
 	'Cambiar permisos directorio ./venv'
 	# Si en la sección 'Plugin Manager' aparece un mensaje de error de acceso al comando `pip` debemos
 	# dar acceso total así:
-	sudo chmod -R 777 /home/orangeprint/Octoprint/venv/
+	sudo chmod -R 777 ~/OctoPrint/venv/
 
+
+    'Python 3 Check'    
+    URL Instalación: https://github.com/jneilliii/OctoPrint-Python3PluginCompatibilityCheck/archive/master.zip
+
+    'Auto bed leveling expert'
+    
+    'Bed Level Visualizer'
+        Dependencias NumPy: pip install numpy
 
 	'Firmware Updater'			https://plugins.octoprint.org/plugins/firmwareupdater/
-		`Preinstalar`
-		sudo apt-get install avrdude		
-		`Configurar`
+
+        `CHIPs LPC1768`
+        Paths: /home/orangeprint/share/firmware		
+
+        `Basadas en Arduino`
+		sudo apt install avrdude		
+		    `Configurar`
 			Path to avrdude:	/usr/bin/avrdude
 
-	'GCODE System Commands'		https://github.com/kantlivelong/OctoPrint-GCodeSystemCommands
+	'GCODE System Commands'
+    # Actualmente no soporta Python 3, alternativa " LED Strip Control"   
+    https://github.com/kantlivelong/OctoPrint-GCodeSystemCommands
+    Descarga e instalacion Manual
+    https://codeload.github.com/kantlivelong/OctoPrint-GCodeSystemCommands/tar.gz/0.1.1
 		`Configurar`
+        Activar en: Plugins Manager
 		OCTO80	gpio write 7 0
 		OCTO81	gpio write 7 1
+
+    
 		
 	'GcodeEditor'				https://github.com/ieatacid/OctoPrint-GcodeEditor
 	
@@ -594,8 +669,8 @@
 
 	'Preheat Button'			https://github.com/marian42/octoprint-preheat
 		`Configurar`
-		Fallback temperature for tool preheating	200		# Para PLA
-		Fallback temperature for bed preheating		 50		# "		"
+		Fallback temperature forr tool preheating	200		# Para PLA 
+		Fallback temperature forr bed preheating		 50		# "		"
 		
 	'Simple Emergency Stop'		https://github.com/BrokenFire/OctoPrint-SimpleEmergencyStop	
 		`Configurar`
@@ -622,26 +697,29 @@
 		Name:		WebCam Restart
 		Action:		Reiniciar Servidor Motion
 		Command:	sudo service motion restart
-		
+
+    'OctoPrint-BLTouch'		
 	'TouchUI'					http://plugins.octoprint.org/plugins/touchui/
-	
+    'Themeify'
+    'Prusa Leveling Guide'
+    'Terminal Commands Extended'    
 
 		
 'LIMPIAR HISTORIAL Y CACHES'
 
 
 	'Borrar paquetes parciales'
-	sudo apt-get autoclean
+	sudo apt autoclean
 	
 	'Eliminar paquetes *.deb de las instalaciones'
-	sudo apt-get clean
+	sudo apt clean
 		
 	'Eliminar Paquetes y dependencias que el sistema ya no necesita'
-	sudo apt-get autoremove
-	sudo apt-get purge
+	sudo apt autoremove
+	sudo apt purge
 		
 	'Eliminar datos locales innecesarios'
-	sudo apt-get install localepurge
+	sudo apt install localepurge
 	
 	'Historial de comandos'
 	history -c
@@ -681,7 +759,7 @@
 	sudo umount /dev/mmcblk0p1
 	
 	# Iniciar Copia de Seguridad
-	sudo dd if=/dev/mmcblk0 of=/media/USB/mibackup.img bs=1M
+	sudo dd if=/dev/mmcblk0 |pv|dd of=/media/USB/mibackup.img bs=1M
 	
 'Cambiar Tamaño Particion dentro de una *.img'	
 https://softwarebakery.com/shrinking-images-on-linux
@@ -727,10 +805,17 @@ https://softwarebakery.com/shrinking-images-on-linux
 					
 	`resize2fs`		https://forum.armbian.com/topic/487-reinitiate-sd-card-resize-on-boot/?do=findComment&comment=28814
 					https://forum.armbian.com/topic/3783-orange-pi-lite-freezes/?do=findComment&comment=27487
-					
+	
+    `Mover. Copiar, Renombrar` https://ed.team/blog/mover-copiar-y-renombrar-directorios-en-linux
+				
 	`Sintaxis MarkDown`	https://markdown.es/sintaxis-markdown/
 					
-# Enlaces cortes:					
-[alias]: https://www.enmimaquinafunciona.com/pregunta/24690/por-defecto-python-comando-a-usar-python-3
-					
-	
+# Enlaces cortos:					
+[alias_python]: https://www.enmimaquinafunciona.com/pregunta/24690/por-defecto-python-comando-a-usar-python-3
+
+[alias_pip]: https://stackoverflow.com/questions/44455001/how-to-change-pip3-command-to-be-pip
+
+[virtual_python3]: https://help.dreamhost.com/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3
+
+
+
