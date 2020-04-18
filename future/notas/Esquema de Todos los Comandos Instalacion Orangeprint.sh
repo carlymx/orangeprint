@@ -149,18 +149,19 @@
 	'Acceder como usuario orangeprint'
 	su orangeprint
 	cd					# accedes al directorio personal directamente
-
-	'Dependencia PySerial (Python 2.7)'
+	
+    	'Dependencias PySerial (Python 2.7)'
+    	sudo pip install pyserial==2.7
+		
+	'(Alternativa) Dependencia PySerial (Python 2.7)'
 	wget https://pypi.python.org/packages/source/p/pyserial/pyserial-2.7.tar.gz
 	tar -zxf pyserial-2.7.tar.gz
 	cd pyserial-2.7
 	sudo python setup.py install
-	
-    'Dependencias PySerial (Python 3)'
-    sudo pip install pyserial==2.7
 
-    'Dependencias PySerial (Python 3)'
-    sudo pip install pyserial
+
+	'Dependencias PySerial (Python 3)'
+    	sudo pip install pyserial
 
 	
 'Instalacion Octoprint (servidor de impresión)'
@@ -169,7 +170,7 @@
 	cd
 	git clone https://github.com/foosel/OctoPrint.git
 	cd OctoPrint
-    # Para Python 2
+    	# Para Python 2
 	    virtualenv venv		# Crear entorno Virtual
 	# Para Python 3 [Entorno Virtual con Python3][virtual_python3]
         virtualenv -p /usr/bin/python3 --python=python3 venv
@@ -185,8 +186,15 @@
 
 	'Iniciar por primera vez el Octoprint'
 	~/OctoPrint/venv/bin/octoprint serve
-	# Una vez comprobado que funciona accediendo por el navegador web a la IP de la OPI ( ej: xx.xx.xx.xx:5000)
-    # Configure los parametros Iniciales
+# Una vez comprobado que funciona accediendo por el navegador web a la IP de la OPI ( ej: xx.xx.xx.xx:5000)
+### Si Experimenta problemas de inicio (OctoPrint >=1.4.0 Stable) derivados por falta de dependencias pruebe con:
+	cd
+	cd OctoPrint/
+	./venv/bin/pip install pytz flask MarkupSafe markdown
+	
+   
+   
+   # Configure los parametros Iniciales
     'Access Control'
     Username:   orangeprint
     Password:   orangeprint
