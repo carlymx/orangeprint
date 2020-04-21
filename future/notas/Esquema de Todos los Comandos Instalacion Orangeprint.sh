@@ -291,6 +291,22 @@
 			## for Motion to find it. More configuration examples as well as init scripts
 			## can be found in /usr/local/share/motion/examples.
 
+		'Instalar Motion por paquete DEB'
+		# Descargar paquete DEB que corresponda para la versión del Sistema y la Maquina
+		# Ejemplo ARM64 + DEBIAN_BUSTER
+		# URL: https://github.com/Motion-Project/motion/releases
+		
+		cd
+		wget https://github.com/Motion-Project/motion/releases/download/release-4.3.1/buster_motion_4.3.1-1_arm64.deb
+		sudo dpkg -i buster_motion_4.3.1-1_arm64.deb
+		 ** Si faltan Dependencias **
+		   sudo apt -f install
+		   sudo dpkg -i buster_motion_4.3.1-1_arm64.deb
+		
+		# probar que se haya instalado ejecutando el servidor escribiendo:
+		motion
+		para salir Ctrl+C
+		
 			
 	'Configurar Motion'
 	
@@ -300,7 +316,7 @@
 	sudo nano /usr/local/etc/motion/motion.conf
 	## ¡¡ El archivo de configuración el a v+4.x.x ha sido simplificado pero motion tiene todos sus parametros con una variable por defecto.
 	## Agregar lineas faltantes en el caso que se quiera modificar el defecto de la variable.
-	## En la guia de instalación estan todas las variables.
+	## En la guia de instalación estan todas las variables. https://github.com/Motion-Project/motion/blob/master/doc/motion_config.html
 	
 		`Daemon`
 			daemon on # --------------------------- Permite la auto-ejecución en el arranque del sistema 
@@ -364,7 +380,11 @@
 	
 	'Configurar inicio del servicio'
 	
-	> Para v4.1.x
+	> Para v4.1.x +v4.3.1
+	
+		## Si se instala desde archivo DEB
+		- El usuario 'motion' ya se crea.
+		- Se crea automatcamente '/etc/int.d/motion'
 	
 		# Crear Usuario Motion
 		sudo adduser motion #---------------------- Crea el usuario, seguir instrucciones, password= motion
@@ -378,7 +398,7 @@
 		sudo crontab -e
 		@reboot sudo /etc/init.d/motion start
 	
-	> Para v3.2.12
+	> Para v3.2.12 y +v4.3.1
 	
 	sudo nano /etc/default/motion
 
@@ -390,9 +410,12 @@
 
 	
 	#### Notas sobre Motion:
-
+	
+	# Para ver la camara:
+		http://192.168.0.xxx:8081
+	
 	# Para configurar y controlar el Motion acceder por web:
-		http://192.168.0.105:8080
+		http://192.168.0.xxx:8080
 	
 	# Control del Servicio Motion
 		sudo service motion start|stop|restart
