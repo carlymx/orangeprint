@@ -545,12 +545,26 @@
 			cd WiringOP-Zero
 			chmod +x ./build
 			sudo ./build
-					
+			
+	'H6 y todas las OrangePi'
+	# https://github.com/orangepi-xunlong/wiringOP
+		.`Instalación`
+		cd
+		git clone https://github.com/orangepi-xunlong/wiringOP.git
+		cd wiringOP
+		sudo ./build clean
+		sudo ./build
+		# Escribir el numero que corresponde a nuestra OrangePi
+		# En el caso de la OrangePi 3 (H6) es el 15 
+		# Una vez termine de compilar ya estara listo para usar
+						
 	'Test'
 	# Muestra tabla ASCII GPIO
 	gpio readall
 	# Activar Led Rojo de la Placa
 	gpio write 30 1
+	# En OrangePi 3 (H6) 26 pins no parece haber GPIO conectado al LED rojo
+	
 
 		 ###===========Ejemplo de la respuesta del comando 'gpio readall'=============###
 		 #						Para una Orange Pi Zero H2+								#
