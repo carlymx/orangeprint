@@ -834,6 +834,8 @@ https://softwarebakery.com/shrinking-images-on-linux
 
 	`Octoprint:` 	https://github.com/foosel/OctoPrint/wiki/Setup-on-a-Raspberry-Pi-running-Raspbian
 	
+	`Octoprint Step-Step:` https://community.octoprint.org/t/setting-up-octoprint-on-a-raspberry-pi-running-raspbian/2337
+	
 	`Motion:`		https://github.com/Motion-Project/motion
 					https://goo.gl/18E1GA
 					http://www.orangepi.org/Docs/Webcams.html
