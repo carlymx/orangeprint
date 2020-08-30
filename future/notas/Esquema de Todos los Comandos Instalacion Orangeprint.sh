@@ -112,10 +112,21 @@
 	
 'Dependencias'
 
+	'Instalación Python 2, PIP y dependencias (obsoleto)'
+	# URL: https://linuxize.com/post/how-to-install-pip-on-ubuntu-20.04/
+	# Instalaciones que se cubren con este metodo: python-pip python-dev python-setuptools python-virtualenv
+	sudo add-apt-repository universe
+	sudo apt update
+	sudo apt install python2
+	curl https://bootstrap.pypa.io/get-pip.py --output get-pip.p
+	sudo python2 get-pip.py
+
+	sudo apt install python-dev python3-virtualenv
+
 	'Instalar Dependencias'
 	sudo apt update
 	sudo apt upgrade
-	sudo apt install python-pip python-dev python-setuptools python-virtualenv virtualenv git libyaml-dev build-essential psmisc
+	sudo apt install virtualenv git libyaml-dev build-essential psmisc
 	sudo pip install -U pip
 		# Para saber la versión de pip que tenemos:
 		> sudo pip --version
