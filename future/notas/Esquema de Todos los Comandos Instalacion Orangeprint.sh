@@ -839,6 +839,13 @@ https://softwarebakery.com/shrinking-images-on-linux
 	# Recortar el espacio sin particionar de la imagen
 	truncate --size=$[(????????+1)*512] myimage.img
 	
+'Reparar sistema de Archivos'
+https://www.sololinux.es/reparar-el-sistema-de-archivos-con-fsck/
+
+	# ejecutar fsck cada vez que inicie el sistema. Para lograr esta operación
+	# debemos crear un archivo (vacio) llamando «forcefsck», e insertarlo en la raíz.
+	sudo touch /forcefsck
+	
 '=========FIN=========='	
 	
 'URLs de Información:'
