@@ -7,7 +7,7 @@ dialog --title "OrangePrint Upgrade [v.0.0.1.1a]" \
 sleep 1
 clear
 
-wget https://raw.githubusercontent.com/carlymx/orangeprint/master/scripts/orangeprint/*
+wget https://raw.githubusercontent.com/carlymx/orangeprint/master/scripts/orangeprint/orangeprint-upgrade.sh
 
 dialog --title "OrangePrint Upgrade [v.0.0.1.1a]" \
        --msgbox "Scripts Actualizados."
