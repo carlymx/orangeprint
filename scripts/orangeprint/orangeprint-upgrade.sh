@@ -2,7 +2,7 @@
 # orangeprint-upgrade.sh - Actualizar scripts orangeprint.
 
 dialog --title "OrangePrint Upgrade [v.0.0.1.2a]" \
-       --msgbox "Vamos a descargar los scripts de Orangeprint"
+       --msgbox "Vamos a descargar los scripts de Orangeprint" 0 0
 
 sleep 1
 clear
@@ -11,5 +11,5 @@ wget https://raw.githubusercontent.com/carlymx/orangeprint/master/scripts/orange
 chmod +x orangeprint-upgrade.sh
 
 dialog --title "OrangePrint Upgrade [v.0.0.1.2a]" \
-       --msgbox "Scripts Actualizados."
+       --msgbox "Scripts Actualizados." 0 0
 clear
