@@ -1,5 +1,5 @@
 #!/bin/bash
-# orangeprint-help.sh - Un Archivo de ayuda.
+# orangeprint-upgrade.sh - Actualizar scripts orangeprint.
 
 dialog --title "OrangePrint Upgrade [v.0.0.1.1a]" \
        --msgbox "Vamos a descargar los scripts de Orangeprint"
