@@ -4,14 +4,14 @@
 # Project: https://github.com/carlymx/orangeprint
 
 # Ventana de bienvenida.
-dialog  --backtitle "OrangePrint Config [v.0.0.2]" \
+dialog  --backtitle "OrangePrint Config [v.0.0.3]" \
         --title "¡¡ Importante: !!" \
         --msgbox "Si esta usando una OPi con procesador potente como un H6 (OrangePi 3) o superior es posible que pueda controlar mas de una impresora a la vez sin problemas, para ello hay que instalar y ejecutar tantos Octoprint como impresoras quiera controlar. Este script le pedira que seleccione la cantidad de Instancias activas que quiere iniciar con el sistema." 20 40 
 
 # Ventana que pregunta cuantas instancias se quieren activar.
 # Variable que contiene los parametros de la ventana:
 instancias=(dialog
-        --backtitle "OrangePrint Config [v.0.0.2]"
+        --backtitle "OrangePrint Config [v.0.0.3]"
         --title "Instancias Activas Octoprint"
         --menu "Seleccione la cantidad de Instancias de Octoprint que quiere usar:" 20 40 10)
 
@@ -58,13 +58,14 @@ sudo sed -i '/START=/c START=yes' /etc/default/octoprint4
 esac
 
 # Ventana Final.
-dialog  --backtitle "OrangePrint Config [v.0.0.2]" \
+dialog  --backtitle "OrangePrint Config [v.0.0.3]" \
         --title "Parametros Actualizados." \
         --yesno "\nSe han configurado sus preferencias.\nSe ha configurado el sistema para $fun_menu Instancias de Octoptrint.\nPara que los cambios surjan efecto debe reiniciar el sistema. \n\n¿Quiere reiniciar el sistema ahora?" 20 40
 
 ans=$?
 if [ $ans -eq 0 ]
 then
+    clear
     sudo reboot
 else
     sleep1
