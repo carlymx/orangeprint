@@ -1,0 +1,57 @@
+#!/bin/bash
+# orangeprint-config.
+# by carlymx@gmail.com
+# Project: https://github.com/carlymx/orangeprint
+
+# Ventana de bienvenida.
+dialog  --backtitle "OrangePrint Config [v.0.0.1]" \
+        --title "¡¡ Importante: !!" \
+        --msgbox "Si esta usando una OPi con procesador potente como un H6 (OrangePi 3) o superior es posible que pueda controlar mas de una impresora a la vez sin problemas, para ello hay que instalar y ejecutar tantos Octoprint como impresoras quiera controlar. Este script le pedira que seleccione la cantidad de Instancias activas que quiere iniciar con el sistema." 20 40 
+# Ventana que pregunta cuantas instancias se quieren activar.
+# Variable que contiene los parametros de la ventana:
+instancias=(dialog
+        --backtitle "OrangePrint Config [v.0.0.1]"
+        --title "Instancias Activas Octoprint"
+        --menu "Seleccione la cantidad de Instancias de Octoprint que quiere usar:" 20 40 10)
+
+# Variable que contiene las opciones posibles a elegir. Su salida sera el numero de la opción elegida (1,2,3...):
+opciones=(
+        1 " 1 Instancia"
+        2 "2 Instancias"
+        3 "3 Instancias"
+        4 "4 Instancias")
+
+# Función que ejecuta la visualización de la ventana de dialogo:
+fun_menu=$("${instancias[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+clear
+
+# Según la elección del usuario se ejecuta el script pertinente:
+case $fun_menu in
+1)
+echo "A escogido la opción 1";;
+
+2)
+echo "A escogido la opción 2";;
+
+3)
+echo "A escogido la opción 3";;
+
+4)
+echo "A escogido la opción 4";;
+esac
+
+sleep 2
+clear
+
+#########################################                                                                                                                                                                                                                                                                                                                                  #               NOTAS:                  #                                                                                                                                                                                                                                                                                                                                  #########################################
+
+
+# Crea una linea en blanco en el promp
+        # echo -e "\n"
+
+# Limpiar pantalla
+        # clear
+
+# Hacer una pausa (segundos)
+        # sleep 1
+
