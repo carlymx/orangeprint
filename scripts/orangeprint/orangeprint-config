@@ -60,7 +60,7 @@ esac
 # Ventana Final.
 dialog  --backtitle "OrangePrint Config [v.0.0.2]" \
         --title "Parametros Actualizados." \
-        --yesno "\nSe han configurado sus preferencias. \n Para que los cambios surjan efecto debe reiniciar el sistema. \n\n ¿Quiere reiniciar el sistema ahora?" 20 40
+        --yesno "\nSe han configurado sus preferencias.\n Se ha configurado el sistema para $fun_menu Instancias de Octoptrint.\n Para que los cambios surjan efecto debe reiniciar el sistema. \n\n ¿Quiere reiniciar el sistema ahora?" 20 40
 
 ans=$?
 if [ $ans -eq 0 ]
