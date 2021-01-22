@@ -1,0 +1,21 @@
+#!/bin/bash
+# orangeprint-upgrade - Actualizar scripts orangeprint.
+# by carlymx@gmail.com
+# Project: https://github.com/carlymx/orangeprint
+
+dialog --backtitle "OrangePrint Upgrade [v.0.0.1.5a]" \
+       --title "Actualización de los Scripts:" \
+       --msgbox "Vamos a descargar los scripts de Orangeprint" 20 40
+
+sleep 1
+clear
+rm -rfv orangeprint-*
+wget https://raw.githubusercontent.com/carlymx/orangeprint/master/scripts/orangeprint/orangeprint-upgrade
+wget https://raw.githubusercontent.com/carlymx/orangeprint/master/scripts/orangeprint/orangeprint-help
+wget https://raw.githubusercontent.com/carlymx/orangeprint/master/scripts/orangeprint/orangeprint-config
+chmod +x orangeprint-*
+
+dialog --backtitle "OrangePrint Upgrade [v.0.0.1.5a]" \
+       --title "Actualización de los Scripts:"
+       --msgbox "Scripts Actualizados." 20 40
+clear
