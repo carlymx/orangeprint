@@ -134,9 +134,22 @@
         > python -m pip list
         > python3 -m pip list
 	
+	**************************************
 	# PYTHON 3 #
 	# Desde el 1 de Enero del 2020 Python 2.7 a pasado a ser EOL [(leer articulo)](https://www.python.org/doc/sunset-python-2/)
 	# Es necesario empezar a usar Python 3 con las instalaciones de Octoprint, pero actualmente muchos complementos pueden no ser compatibles para Python 3.
+	
+	
+	'Pasos para establecer Python3 como predeterminado'
+	  Verificar que version de python estamos usando:
+	  	> python --version (python3 –version para Python 3)
+	  Ejecutamos el siguiente comando para cambiar a Python 3.X. 
+     		> update-alternatives --install /usr/bin/python python /usr/bin/python3 1
+    	  Revisamos repitiendo el paso 1
+    	  Listo! 🙂
+
+	
+	
 	'Instalar Dependencias Python 3'
 	sudo apt install python3-pip python3-dev python3-setuptools python3-virtualenv
     sudo pip3 install -U pip
