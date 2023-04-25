@@ -1,3 +1,5 @@
+![flag_eng](https://raw.githubusercontent.com/carlymx/orangeprint/master/imgs/flag_eng.png)[Readme in English](https://github.com/carlymx/orangeprint)
+
 # ORANGEPRINT 
 ---
 
@@ -6,8 +8,6 @@ Si te gusta este proyecto...[¿Me invitas a un café?](https://www.paypal.com/cg
 ### ORANGEPRINT - Compilación para Orange Pi (Zero) para controlar una impresora RepRap.
 
 ![Logo](./imgs/LogoOctoprint_low2.png)
-
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=carlymx&count_private=false)](https://github.com/anuraghazra/github-readme-stats)
 
 Este es un proyecto donde se intenta crear una compilación de diferentes elementos para poder controlar impresoras RepRap con el software Octoprint en micro computadoras Orange Pi (Zero).
 
@@ -95,4 +95,4 @@ Muchas gracias por probar mi trabajo y espero que les sirva tanto como me esta s
 
 ...
 
-
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=carlymx&count_private=true)](https://github.com/anuraghazra/github-readme-stats)
