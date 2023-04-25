@@ -6,7 +6,6 @@
 
 ![Logo](./imgs/LogoOctoprint_low2.png)
 
-
 This is a project which tries to create a compilation of different elements to be able to control RepRap printers with the Octoprint software in Orange Pi (Zero) micro computers.
 
 The idea arose when my friends asked me for my notes to create their own compilation and it was easier to create a manual at the beginning so that they could do it more easily ... which turned out to be a fiasco because having the manual before I had to indicate in person how to continue step by step, luckily I thought that the manual is well explained ...
@@ -70,3 +69,5 @@ Feel free to collaborate if you believe that this project could be more than a p
 Thank you very much for trying my work and I hope it will serve you as much as it is serving me.**_
 
 ...
+
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=carlymx&count_private=true)](https://github.com/anuraghazra/github-readme-stats)
