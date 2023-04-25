@@ -1,3 +1,5 @@
+![flag_esp](https://raw.githubusercontent.com/carlymx/orangeprint/master/imgs/flag_esp.png) [Leer en Español](https://github.com/carlymx/orangeprint/blob/master/README_ESP.md)
+
 # ORANGEPRINT
 ---
 [Will you invite me to a coffee?](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9TT7E7XWEDAH8&source=url)
